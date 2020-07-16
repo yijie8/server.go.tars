@@ -1,0 +1,326 @@
+module Zserver
+{
+    struct Cpu
+    {
+        0  optional  int cpuNum;
+    };
+    struct Disk
+    {
+        0 optional int free;
+        1 optional int total;
+    };
+
+    struct Mem
+    {
+        0 optional int free;
+        1 optional int total;
+        2 optional int usage;
+        3 optional int used;
+    };
+
+    struct Os
+    {
+        0 optional string arch;
+        1 optional string compiler;
+        2 optional string goOs;
+        3 optional int mem;
+        4 optional int numGoroutine;
+        5 optional string version;
+    };
+
+    struct Monitor_server_res
+    {
+        0 optional int code;
+        1 optional Cpu cpu;
+        2 optional Disk disk;
+        3 optional Mem mem;
+        4 optional Os os;
+    };
+
+    struct GetCaptcha_res
+    {
+        0 optional int code;
+        1 optional string data;
+        2 optional string id;
+        3 optional string msg;
+    };
+
+
+
+    struct GetMenuTreeelect_Children  {
+    	0 optional int id;
+    	1 optional string label;
+    	2 optional vector<GetMenuTreeelect_Children> children;
+    };
+
+    struct GetMenuTreeelect_res  {
+        0 optional int code;
+        1 optional vector<GetMenuTreeelect_Children> data;
+        2 optional string msg;
+    };
+
+    struct Preview_res {
+        0 optional int code;
+        1 optional map<string,string> data;
+        2 optional string msg;
+    };
+
+    struct DictData_res {
+    	0 optional int dictCode;  //字典编码
+    	1 optional int dictSort;  //显示顺序
+    	2 optional string dictLabel; //数据标签
+    	3 optional string dictValue; //数据键值
+    	4 optional string dictType; //字典类型
+    	5 optional string cssClass;  //
+    	6 optional string listClass; //
+    	7 optional string isDefault; //
+    	8 optional string status; //状态
+    	9 optional string default; //
+    	10 optional string createBy; //
+    	11 optional string updateBy; //
+    	12 optional string remark;  //备注
+    	13 optional string params;
+    	14 optional string dataScope;
+    	15 optional string createdAt;
+      16 optional string updatedAt;
+      17 optional string deletedAt;
+    };
+
+
+
+    struct GetDBTableList_req {
+      0 optional string pageSize;
+      1 optional string pageIndex;
+      2 optional string tableName;
+    };
+    struct GetDBTableList_res {
+    	0 optional int code;
+    	1 optional GetDBTableList_Data data;
+    	2 optional string msg;
+    };
+
+    struct GetDBTableList_List {
+    	0 optional string tableName;
+    	1 optional string engine;
+    	2 optional string tableRows;
+    	3 optional string tableCollation;
+    	4 optional string createTime;
+    	5 optional string updateTime;
+    	6 optional string tableComment;
+    };
+
+    struct GetDBTableList_Data {
+    	0 optional int count;
+    	1 optional vector<GetDBTableList_List> list;
+    	2 optional int pageIndex;
+    	3 optional int pageSize;
+    };
+
+
+    struct GetDBColumnList_req {
+      0 optional string pageSize;
+      1 optional string pageIndex;
+      2 optional string tableName;
+    };
+    struct GetDBColumnList_res {
+      0 optional int code;
+      1 optional GetDBColumnList_Data data;
+      2 optional string msg;
+    };
+
+    struct GetDBColumnList_List {
+    	0 optional string tableSchema;
+    	1 optional string tableName;
+    	2 optional string columnName;
+    	3 optional string columnDefault;
+    	4 optional string isNullable;
+    	5 optional string dataType;
+    	6 optional string characterMaximumLength;
+    	7 optional string characterSetName;
+    	8 optional string columnType;
+    	9 optional string columnKey;
+    	10 optional string extra;
+    	11 optional string columnComment;
+    };
+
+    struct GetDBColumnList_Data {
+      0 optional int count;
+      1 optional vector<GetDBColumnList_List> list;
+      2 optional int pageIndex;
+      3 optional int pageSize;
+    };
+
+
+    struct Table_req {
+      0 optional string pageSize;
+      1 optional string pageIndex;
+      2 optional string tableName;
+      3 optional string tableComment;
+    };
+
+    struct SysTables_Data {
+      0 optional int count;
+      1 optional vector<SysTables_List> data;
+      2 optional int pageIndex;
+      3 optional int pageSize;
+    };
+
+    struct SysTables_res {
+      0 optional int code;
+      1 optional SysTables_Data data;
+      2 optional string msg;
+    };
+    struct SysTables_one_res {
+      0 optional int code;
+      1 optional SysTables_List data;
+      2 optional string msg;
+    };
+
+    struct SysTables_List {
+    	0 optional int tableId;             //表编码
+    	1 optional string tableName; //表名称
+    	2 optional string tableComment;                //表备注
+    	3 optional string className;                   //类名
+    	4 optional string tplCategory;
+    	5 optional string packageName; //包名
+    	6 optional string moduleName;  //模块名
+    	7 optional string businessName;
+    	8 optional string functionName;   //功能名称
+    	9 optional string functionAuthor; //功能作者
+    	10 optional string pkColumn;
+    	11 optional string pkGoField;
+    	12 optional string pkJsonField;
+    	13 optional string options;
+    	14 optional string treeCode;
+    	15 optional string treeParentCode;
+    	16 optional string treeName;
+    	17 optional bool tree;
+    	18 optional bool crud;
+    	19 optional string remark;
+    	20 optional string isLogicalDelete;
+    	21 optional bool logicalDelete;
+    	22 optional string logicalDeleteColumn;
+    	23 optional string createBy;
+    	24 optional string updateBy;
+    	25 optional string dataScope;
+    	26 optional Params params; /////////////
+    	27 optional vector<SysColumns_res> columns; ////////////
+
+    	28 optional string createdAt;
+        29 optional string updatedAt;
+        30 optional string deletedAt;
+    };
+    struct Params {
+    	0 optional string treeCode;
+    	1 optional string treeParentCode;
+    	2 optional string treeName;
+    };
+
+    struct SysColumns_res {
+        0 optional int     columnId;
+        1 optional int     tableId;
+        2 optional string  columnName;
+        3 optional string  columnComment;
+        4 optional string  columnType;
+        5 optional string  goType;
+        6 optional string  goField;
+        7 optional string  jsonField;
+        8 optional string  isPk;
+        9 optional string  isIncrement;
+        10 optional string  isRequired;
+        11 optional string  isInsert;
+        12 optional string  isEdit;
+        13 optional string  isList;
+        14 optional string  isQuery;
+        15 optional string  queryType;
+        16 optional string  htmlType;
+        17 optional string  dictType;
+        18 optional int     sort;
+        19 optional string  list;
+        20 optional bool    pk;
+        21 optional bool    required;
+        22 optional bool    superColumn;
+        23 optional bool    usableColumn;
+        24 optional bool    increment;
+        25 optional bool    insert;
+        26 optional bool    edit;
+        27 optional bool    query;
+        28 optional string  remark;
+        29 optional string  createBy;
+        30 optional string  updateBy;
+
+        31 optional string createdAt;
+        32 optional string updatedAt;
+        33 optional string deletedAt;
+    };
+    struct InsertSysTable_req {
+        0 require string tables;
+    };
+
+    struct Response_res {
+    	0 optional int code;
+    	1 optional string data;
+    	2 optional string msg;
+    };
+
+
+	interface WebApiNoAuth
+	{
+	    void GetSysTables(string tableId,out SysTables_one_res res);
+        void DeleteSysTables(string tableId,out Response_res res);
+        void UpdateSysTable(string uid,SysTables_List req,out Response_res res);
+	    void InsertSysTable(InsertSysTable_req req,out Response_res res);
+	    void GetSysTableList(Table_req req,out SysTables_res res);
+	    void GetDBColumnList(GetDBColumnList_req req,out GetDBColumnList_res res);
+	    void GetDBTableList(GetDBTableList_req req,out GetDBTableList_res res);
+	    void GetDictDataByDictType(string dictType,out DictData_res res);
+	    void Preview(int id,out Preview_res res);
+	    void MenuTreeselect(out GetMenuTreeelect_res res);
+	    void Monitor_server(out Monitor_server_res res);
+	    void GetCaptcha(out GetCaptcha_res res);
+	};
+
+
+
+
+
+	struct LoginLog {
+        0 optional int       infoId; //主键
+        1 optional string    username;       //用户名
+        2 optional string    status;               //状态
+        3 optional string    ipaddr;         //ip地址
+        4 optional string    loginLocation;  //归属地
+        5 optional string    browser;        //浏览器
+        6 optional string    os;             //系统
+        7 optional string    platform;       // 固件
+        8 optional string    loginTime;         //登录时间
+        9 optional string    createBy;       //创建人
+        10 optional string    updateBy;       //更新者
+        11 optional string    dataScope;                       //数据
+        12 optional string    params;                          //
+        13 optional string    remark;         //备注
+        14 optional string    msg;
+        15 optional string createdAt;
+        16 optional string updatedAt;
+        17 optional string deletedAt;
+    };
+    struct LoginLog_List {
+         0 optional vector<LoginLog> loginLogList;
+         1 optional int  count;
+    };
+
+
+
+    interface WebApiAuth
+    {
+        void LoginLog_Get(LoginLog req,out LoginLog res);
+        void LoginLog_GetPage(int pageSize,int pageIndex,LoginLog req,out LoginLog_List res);
+        void LoginLog_Create(LoginLog req,out LoginLog res);
+        void LoginLog_Update(int id,LoginLog req,out LoginLog res);
+        void LoginLog_BatchDelete(vector<int> id,LoginLog req,out bool res);
+    };
+
+
+
+
+};

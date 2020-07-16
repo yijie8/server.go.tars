@@ -1,0 +1,38 @@
+module Zserver
+{
+    struct LoginLog {
+        0 optional int       infoId; //主键
+        1 optional string    username;       //用户名
+        2 optional string    status;               //状态
+        3 optional string    ipaddr;         //ip地址
+        4 optional string    loginLocation;  //归属地
+        5 optional string    browser;        //浏览器
+        6 optional string    os;             //系统
+        7 optional string    platform;       // 固件
+        8 optional string    loginTime;         //登录时间
+        9 optional string    createBy;       //创建人
+        10 optional string    updateBy;       //更新者
+        11 optional string    dataScope;                       //数据
+        12 optional string    params;                          //
+        13 optional string    remark;         //备注
+        14 optional string    msg;
+        15 optional string createdAt;
+        16 optional string updatedAt;
+        17 optional string deletedAt;
+    };
+    struct LoginLog_List {
+         0 optional vector<LoginLog> loginLogList;
+         1 optional int  count;
+    };
+
+
+
+	interface WebApiAuth
+	{
+	    void LoginLog_Get(LoginLog req,out LoginLog res);
+	    void LoginLog_GetPage(int pageSize,int pageIndex,LoginLog req,out LoginLog_List res);
+	    void LoginLog_Create(LoginLog req,out LoginLog res);
+	    void LoginLog_Update(int id,LoginLog req,out LoginLog res);
+	    void LoginLog_BatchDelete(vector<int> id,LoginLog req,out bool res);
+	};
+};
