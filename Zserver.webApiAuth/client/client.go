@@ -2,6 +2,7 @@ package client
 
 import "encoding/json"
 
+// 不好用，最后返回的map[string]interface{} 不是正常的struct
 func Struct2Struct(form interface{}, to interface{}) interface{} {
 	jsonx, err := json.Marshal(form)
 	if err != nil {

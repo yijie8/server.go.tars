@@ -3,7 +3,7 @@ package imp
 import (
 	"context"
 	"encoding/json"
-	
+
 	"ZserverWebApiAuth/Zserver"
 	"ZserverWebApiAuth/client"
 	"ZserverWebApiAuth/models"
@@ -20,40 +20,57 @@ func (imp *WebGo_Imp) Init() error {
 	return nil
 }
 
+var loginLog models.LoginLog
+
 func (imp *WebGo_Imp) LoginLog_Get(tarsCtx context.Context, req *Zserver.LoginLog, res *Zserver.LoginLog) (err error) {
-	var loginLog models.LoginLog
 	err = json.Unmarshal(client.Struct2Json(req), &loginLog)
 	if err != nil {
 		return err
 	}
-	
+
 	result, err := loginLog.Get()
 	if err != nil {
 		return err
 	}
-	err = json.Unmarshal(client.Struct2Json(result), &res)
+	err = json.Unmarshal(client.Struct2Json(result), res)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 func (imp *WebGo_Imp) LoginLog_GetPage(tarsCtx context.Context, pageSize int32, pageIndex int32, req *Zserver.LoginLog, res *Zserver.LoginLog_List) (err error) {
-	loginLog := client.Struct2Struct(req, models.LoginLog{}).(models.LoginLog)
+	err = json.Unmarshal(client.Struct2Json(req), &loginLog)
+	if err != nil {
+		return err
+	}
+
 	result, count, err := loginLog.GetPage(int(pageSize), int(pageIndex))
 	if err != nil {
 		return err
 	}
 	res.Count = int32(count)
-	res.LoginLogList = client.Struct2Struct(result, []models.LoginLog{}).([]Zserver.LoginLog)
+
+	err = json.Unmarshal(client.Struct2Json(result), &res.LoginLogList)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 func (imp *WebGo_Imp) LoginLog_Create(tarsCtx context.Context, req *Zserver.LoginLog, res *Zserver.LoginLog) (err error) {
-	loginLog := client.Struct2Struct(req, models.LoginLog{}).(models.LoginLog)
+	err = json.Unmarshal(client.Struct2Json(req), &loginLog)
+	if err != nil {
+		return err
+	}
+
 	result, err := loginLog.Create()
 	if err != nil {
 		return err
 	}
-	res = client.Struct2Struct(result, res).(*Zserver.LoginLog)
+	err = json.Unmarshal(client.Struct2Json(result), res)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 func (imp *WebGo_Imp) LoginLog_Update(tarsCtx context.Context, id int32, req *Zserver.LoginLog, res *Zserver.LoginLog) (err error) {
