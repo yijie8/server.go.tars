@@ -22,7 +22,8 @@ func WebApiNoAuth() *Zserver.WebApiNoAuth {
 }
 
 func WebApiAuth() *Zserver.WebApiAuth {
-	Obj = tools.Conn_server("Zserver.WebApiAuth.TcpObj", "", Conn)
+	Obj = tools.Conn_server("Zserver.WebApiAuth.TcpObj", "10015", Conn)
+	//Obj = fmt.Sprintf("%v@tcp -h 127.0.0.1 -p %v -t 60000", Obj, "10015")
 	App := new(Zserver.WebApiAuth)
 	Conn.StringToProxy(Obj, App)
 	return App

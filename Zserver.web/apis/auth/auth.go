@@ -82,18 +82,21 @@ func Authenticator(c *gin.Context) (interface{}, error) {
 	if !store.Verify(loginVals.UUID, loginVals.Code, true) {
 		loginlog.Status = "1"
 		loginlog.Msg = "验证码错误"
-		//loginlog.Create()
+
 		var req Zserver.LoginLog
 		var res Zserver.LoginLog
 
-		jsonx := client.Struct2Json(loginlog)
-		err := json.Unmarshal(jsonx, &req)
+		err := json.Unmarshal(client.Struct2Json(loginlog), &req)
 		if err != nil {
 			return nil, err
 		}
 
-		_ = client.WebApiAuth().LoginLog_Create(&req, &res)
+		err = client.WebApiAuth().LoginLog_Create(&req, &res)
+		if err != nil {
+			log.Error(err)
+		}
 		// TODO 不好使，不返回
+		log.Println(req)
 		log.Println(res)
 		return nil, jwt.ErrInvalidVerificationode
 	}

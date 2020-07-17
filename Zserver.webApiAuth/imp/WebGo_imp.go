@@ -74,16 +74,26 @@ func (imp *WebGo_Imp) LoginLog_Create(tarsCtx context.Context, req *Zserver.Logi
 	return nil
 }
 func (imp *WebGo_Imp) LoginLog_Update(tarsCtx context.Context, id int32, req *Zserver.LoginLog, res *Zserver.LoginLog) (err error) {
-	loginLog := client.Struct2Struct(req, models.LoginLog{}).(models.LoginLog)
+	err = json.Unmarshal(client.Struct2Json(req), &loginLog)
+	if err != nil {
+		return err
+	}
+
 	result, err := loginLog.Update(int(id))
 	if err != nil {
 		return err
 	}
-	res = client.Struct2Struct(result, res).(*Zserver.LoginLog)
+	err = json.Unmarshal(client.Struct2Json(result), res)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 func (imp *WebGo_Imp) LoginLog_BatchDelete(tarsCtx context.Context, id []int32, req *Zserver.LoginLog, res *bool) (err error) {
-	loginLog := client.Struct2Struct(req, models.LoginLog{}).(models.LoginLog)
+	err = json.Unmarshal(client.Struct2Json(req), &loginLog)
+	if err != nil {
+		return err
+	}
 	result, err := loginLog.BatchDelete(client.Ar2Int(id))
 	if err != nil {
 		return err
