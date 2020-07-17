@@ -68,3 +68,20 @@ func Ar2Int(from interface{}) (to []int) {
 	}
 	return to
 }
+
+func Ar2Int32(from interface{}) (to []int32) {
+	to = make([]int32, 0)
+	for k, v := range from.([]interface{}) {
+		switch v.(type) {
+		case int8:
+			to[k] = int32(v.(int8))
+		case int16:
+			to[k] = int32(v.(int16))
+		case int:
+			to[k] = int32(v.(int))
+		case int64:
+			to[k] = int32(v.(int64))
+		}
+	}
+	return to
+}

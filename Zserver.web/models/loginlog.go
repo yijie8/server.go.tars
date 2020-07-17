@@ -1,7 +1,9 @@
 package models
 
 import (
-	"github.com/yijie8/zserver/global/orm"
+	"ZserverWeb/Zserver"
+	"ZserverWeb/client"
+	"encoding/json"
 	"time"
 )
 
@@ -24,80 +26,101 @@ type LoginLog struct {
 	BaseModel
 }
 
+var req Zserver.LoginLog
+var res Zserver.LoginLog
+var ress Zserver.LoginLog_List
+var doc LoginLog
+var docs []LoginLog
+
 func (LoginLog) TableName() string {
 	return "sys_loginlog"
 }
 
 func (e *LoginLog) Get() (LoginLog, error) {
-	var doc LoginLog
-
-	table := orm.Eloquent.Table(e.TableName())
-	if e.Ipaddr != "" {
-		table = table.Where("ipaddr = ?", e.Ipaddr)
-	}
-	if e.InfoId != 0 {
-		table = table.Where("info_id = ?", e.InfoId)
-	}
-
-	if err := table.First(&doc).Error; err != nil {
+	err := json.Unmarshal(client.Struct2Json(e), &req)
+	if err != nil {
 		return doc, err
 	}
+
+	err = client.WebApiAuth().LoginLog_Get(&req, &res)
+	if err != nil {
+		return doc, err
+	}
+	err = json.Unmarshal(client.Struct2Json(res), &doc)
+	if err != nil {
+		return doc, err
+	}
+
 	return doc, nil
 }
 
 func (e *LoginLog) GetPage(pageSize int, pageIndex int) ([]LoginLog, int, error) {
-	var doc []LoginLog
-
-	table := orm.Eloquent.Select("*").Table(e.TableName())
-	if e.Ipaddr != "" {
-		table = table.Where("ipaddr = ?", e.Ipaddr)
-	}
-	if e.Status != "" {
-		table = table.Where("status = ?", e.Status)
-	}
-	if e.Username != "" {
-		table = table.Where("userName = ?", e.Username)
-	}
-
 	var count int
-
-	if err := table.Order("info_id desc").Offset((pageIndex - 1) * pageSize).Limit(pageSize).Find(&doc).Error; err != nil {
-		return nil, 0, err
+	err := json.Unmarshal(client.Struct2Json(e), &req)
+	if err != nil {
+		return docs, count, err
 	}
-	table.Where("`deleted_at` IS NULL").Count(&count)
-	return doc, count, nil
+	err = client.WebApiAuth().LoginLog_GetPage(int32(pageSize), int32(pageIndex), &req, &ress)
+	if err != nil {
+		return docs, count, err
+	}
+	err = json.Unmarshal(client.Struct2Json(res), &docs)
+	if err != nil {
+		return docs, count, err
+	}
+	return docs, count, nil
 }
 
 func (e *LoginLog) Create() (LoginLog, error) {
 	var doc LoginLog
 	e.CreateBy = "0"
 	e.UpdateBy = "0"
-	result := orm.Eloquent.Table(e.TableName()).Create(&e)
-	if result.Error != nil {
-		err := result.Error
+
+	err := json.Unmarshal(client.Struct2Json(e), &req)
+	if err != nil {
 		return doc, err
 	}
-	doc = *e
+
+	err = client.WebApiAuth().LoginLog_Create(&req, &res)
+	if err != nil {
+		return doc, err
+	}
+	err = json.Unmarshal(client.Struct2Json(res), &doc)
+	if err != nil {
+		return doc, err
+	}
 	return doc, nil
 }
 
 func (e *LoginLog) Update(id int) (update LoginLog, err error) {
-
-	if err = orm.Eloquent.Table(e.TableName()).First(&update, id).Error; err != nil {
-		return
+	err = json.Unmarshal(client.Struct2Json(e), &req)
+	if err != nil {
+		return update, err
+	}
+	err = client.WebApiAuth().LoginLog_Update(int32(id), &req, &res)
+	if err != nil {
+		return update, err
+	}
+	err = json.Unmarshal(client.Struct2Json(res), &update)
+	if err != nil {
+		return update, err
 	}
 
-	//参数1:是要修改的数据
-	//参数2:是修改的数据
-	if err = orm.Eloquent.Table(e.TableName()).Model(&update).Updates(&e).Error; err != nil {
-		return
-	}
 	return
 }
 
 func (e *LoginLog) BatchDelete(id []int) (Result bool, err error) {
-	if err = orm.Eloquent.Table(e.TableName()).Where("info_id in (?)", id).Delete(&LoginLog{}).Error; err != nil {
-		return
+	err = json.Unmarshal(client.Struct2Json(e), &req)
+	if err != nil {
+		return false, err
+	}
+	err = client.WebApiAuth().LoginLog_BatchDelete(client.Ar2Int32(id), &req, &Result)
+	if err != nil {
+		return false, err
+	}
+	err = json.Unmarshal(client.Struct2Json(res), &doc)
+	if err != nil {
+		return false, err
 	}
 	Result = true
 	return

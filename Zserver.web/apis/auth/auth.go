@@ -1,10 +1,7 @@
 package auth
 
 import (
-	"ZserverWeb/Zserver"
-	"ZserverWeb/client"
 	"ZserverWeb/models"
-	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/mojocn/base64Captcha"
 	"github.com/mssola/user_agent"
@@ -82,22 +79,7 @@ func Authenticator(c *gin.Context) (interface{}, error) {
 	if !store.Verify(loginVals.UUID, loginVals.Code, true) {
 		loginlog.Status = "1"
 		loginlog.Msg = "验证码错误"
-
-		var req Zserver.LoginLog
-		var res Zserver.LoginLog
-
-		err := json.Unmarshal(client.Struct2Json(loginlog), &req)
-		if err != nil {
-			return nil, err
-		}
-
-		err = client.WebApiAuth().LoginLog_Create(&req, &res)
-		if err != nil {
-			log.Error(err)
-		}
-		// TODO 不好使，不返回
-		log.Println(req)
-		log.Println(res)
+		loginlog.Create()
 		return nil, jwt.ErrInvalidVerificationode
 	}
 
