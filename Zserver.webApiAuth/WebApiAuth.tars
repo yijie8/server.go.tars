@@ -25,10 +25,37 @@ module Zserver
          1 optional int  count;
     };
 
+    struct SysConfig {
+    	0 optional     int    configId; //编码
+    	1 optional   string configName;        //参数名称
+    	2 optional    string configKey;         //参数键名
+    	3 optional  string configValue;       //参数键值
+    	4 optional   string configType;         //是否系统内置
+    	5 optional       string remark;            //备注
+    	6 optional     string createBy;
+    	7 optional     string updateBy;
+    	8 optional    string dataScope;
+    	9 optional       string params;
+        10 optional string createdAt;
+        11 optional string updatedAt;
+        12 optional string deletedAt;
+    };
+
+    struct SysConfig_List {
+         0 optional vector<SysConfig> sysConfigList;
+         1 optional int  count;
+    };
 
 
 	interface WebApiAuth
 	{
+	    void SysConfig_Create(SysConfig req,out SysConfig res);
+	    void SysConfig_Get(SysConfig req,out SysConfig res);
+	    void SysConfig_GetPage(int pageSize,int pageIndex,SysConfig req,out SysConfig_List res);
+	    void SysConfig_Update(int id,SysConfig req,out SysConfig res);
+	    void SysConfig_Delete(SysConfig req,out SysConfig res);
+	    void SysConfig_BatchDelete(vector<int> id,SysConfig req,out SysConfig res);
+
 	    void LoginLog_Get(LoginLog req,out LoginLog res);
 	    void LoginLog_GetPage(int pageSize,int pageIndex,LoginLog req,out LoginLog_List res);
 	    void LoginLog_Create(LoginLog req,out LoginLog res);
