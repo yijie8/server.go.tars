@@ -123,7 +123,7 @@ func (e *SysUser) GetPage(pageSize int, pageIndex int) ([]SysUserPage, int, erro
 		return docs, count, err
 	}
 	count = int(ress_sysuser.Count)
-	err = json.Unmarshal(client.Struct2Json(ress_sysuser), &docs)
+	err = json.Unmarshal(client.Struct2Json(ress_sysuser.SysUserList), &docs)
 	if err != nil {
 		return docs, count, err
 	}

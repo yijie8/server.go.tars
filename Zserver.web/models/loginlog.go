@@ -64,11 +64,11 @@ func (e *LoginLog) GetPage(pageSize int, pageIndex int) ([]LoginLog, int, error)
 	if err != nil {
 		return docs_loginLog, count, err
 	}
-	err = json.Unmarshal(client.Struct2Json(res_loginlog), &docs_loginLog)
+	err = json.Unmarshal(client.Struct2Json(ress_loginLog_List.LoginLogList), &docs_loginLog)
 	if err != nil {
-		return docs_loginLog, count, err
+		return docs_loginLog, 0, err
 	}
-	return docs_loginLog, count, nil
+	return docs_loginLog, int(ress_loginLog_List.Count), nil
 }
 
 func (e *LoginLog) Create() (LoginLog, error) {
@@ -105,7 +105,6 @@ func (e *LoginLog) Update(id int) (update LoginLog, err error) {
 	if err != nil {
 		return update, err
 	}
-
 	return
 }
 

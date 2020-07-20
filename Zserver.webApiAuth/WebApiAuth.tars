@@ -96,7 +96,7 @@ module Zserver
 	    void SysConfig_Get(SysConfig req,out SysConfig res);
 	    void SysConfig_GetPage(int pageSize,int pageIndex,SysConfig req,out SysConfig_List res);
 	    void SysConfig_Update(int id,SysConfig req,out SysConfig res);
-	    void SysConfig_Delete(SysConfig req,out SysConfig res);
+	    void SysConfig_Delete(SysConfig req,out bool res);
 	    void SysConfig_BatchDelete(vector<int> id,SysConfig req,out bool res);
 
 	    void LoginLog_Get(LoginLog req,out LoginLog res);

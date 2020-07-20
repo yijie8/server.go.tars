@@ -172,7 +172,7 @@ func (imp *WebGo_Imp) SysConfig_Update(tarsCtx context.Context, id int32, req *Z
 	}
 	return nil
 }
-func (imp *WebGo_Imp) SysConfig_Delete(tarsCtx context.Context, req *Zserver.SysConfig, res *Zserver.SysConfig) (err error) {
+func (imp *WebGo_Imp) SysConfig_Delete(tarsCtx context.Context, req *Zserver.SysConfig, res *bool) (err error) {
 	err = json.Unmarshal(client.Struct2Json(req), &sysConfig)
 	if err != nil {
 		return err
@@ -182,10 +182,7 @@ func (imp *WebGo_Imp) SysConfig_Delete(tarsCtx context.Context, req *Zserver.Sys
 	if err != nil {
 		return err
 	}
-	err = json.Unmarshal(client.Struct2Json(result), res)
-	if err != nil {
-		return err
-	}
+	*res = result
 	return nil
 }
 func (imp *WebGo_Imp) SysConfig_BatchDelete(tarsCtx context.Context, id []int32, req *Zserver.SysConfig, res *bool) (err error) {

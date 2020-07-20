@@ -1,9 +1,9 @@
 package models
 
 import (
-	"errors"
-	orm "github.com/yijie8/zserver/global/orm"
-	"github.com/yijie8/zserver/tools"
+	"ZserverWeb/Zserver"
+	"ZserverWeb/client"
+	"encoding/json"
 	_ "time"
 )
 
@@ -21,112 +21,100 @@ type SysConfig struct {
 	BaseModel
 }
 
+var req_sysConfig Zserver.SysConfig
+var res_sysConfig Zserver.SysConfig
+var ress_sysConfig Zserver.SysConfig_List
+
 func (SysConfig) TableName() string {
 	return "sys_config"
 }
 
 // Config 创建
-func (e *SysConfig) Create() (SysConfig, error) {
-	var doc SysConfig
-	i := 0
-	orm.Eloquent.Table(e.TableName()).Where("config_name=? or config_key = ?", e.ConfigName, e.ConfigKey).Count(&i)
-	if i > 0 {
-		return doc, errors.New("参数名称或者参数键名已经存在！")
-	}
-
-	result := orm.Eloquent.Table(e.TableName()).Create(&e)
-	if result.Error != nil {
-		err := result.Error
+func (e *SysConfig) Create() (doc SysConfig, err error) {
+	err = json.Unmarshal(client.Struct2Json(e), &req_sysConfig)
+	if err != nil {
 		return doc, err
 	}
-	doc = *e
+	err = client.WebApiAuth().SysConfig_Create(&req_sysConfig, &res_sysConfig)
+	if err != nil {
+		return doc, err
+	}
+	err = json.Unmarshal(client.Struct2Json(res_sysConfig), &doc)
+	if err != nil {
+		return doc, err
+	}
 	return doc, nil
 }
 
 // 获取 Config
-func (e *SysConfig) Get() (SysConfig, error) {
-	var doc SysConfig
-
-	table := orm.Eloquent.Table(e.TableName())
-	if e.ConfigId != 0 {
-		table = table.Where("config_id = ?", e.ConfigId)
+func (e *SysConfig) Get() (doc SysConfig, err error) {
+	err = json.Unmarshal(client.Struct2Json(e), &req_sysConfig)
+	if err != nil {
+		return doc, err
 	}
-
-	if e.ConfigKey != "" {
-		table = table.Where("config_key = ?", e.ConfigKey)
+	err = client.WebApiAuth().SysConfig_Get(&req_sysConfig, &res_sysConfig)
+	if err != nil {
+		return doc, err
 	}
-
-	if err := table.First(&doc).Error; err != nil {
+	err = json.Unmarshal(client.Struct2Json(res_sysConfig), &doc)
+	if err != nil {
 		return doc, err
 	}
 	return doc, nil
 }
 
-func (e *SysConfig) GetPage(pageSize int, pageIndex int) ([]SysConfig, int, error) {
-	var doc []SysConfig
-
-	table := orm.Eloquent.Select("*").Table(e.TableName())
-
-	if e.ConfigName != "" {
-		table = table.Where("config_name = ?", e.ConfigName)
-	}
-	if e.ConfigKey != "" {
-		table = table.Where("config_key = ?", e.ConfigKey)
-	}
-	if e.ConfigType != "" {
-		table = table.Where("config_type = ?", e.ConfigType)
-	}
-
-	// 数据权限控制
-	dataPermission := new(DataPermission)
-	dataPermission.UserId, _ = tools.StringToInt(e.DataScope)
-	table, err := dataPermission.GetDataScope("sys_config", table)
+func (e *SysConfig) GetPage(pageSize int, pageIndex int) (doc []SysConfig, count int, err error) {
+	err = json.Unmarshal(client.Struct2Json(e), &ress_sysConfig)
 	if err != nil {
-		return nil, 0, err
+		return doc, count, err
 	}
-	var count int
-
-	if err := table.Offset((pageIndex - 1) * pageSize).Limit(pageSize).Find(&doc).Error; err != nil {
-		return nil, 0, err
+	err = client.WebApiAuth().SysConfig_GetPage(int32(pageSize), int32(pageIndex), &req_sysConfig, &ress_sysConfig)
+	if err != nil {
+		return doc, count, err
 	}
-	table.Where("`deleted_at` IS NULL").Count(&count)
-	return doc, count, nil
+	err = json.Unmarshal(client.Struct2Json(ress_sysConfig.SysConfigList), &doc)
+	if err != nil {
+		return doc, count, err
+	}
+	return doc, int(ress_sysConfig.Count), nil
 }
 
 func (e *SysConfig) Update(id int) (update SysConfig, err error) {
-	if err = orm.Eloquent.Table(e.TableName()).Where("config_id = ?", id).First(&update).Error; err != nil {
-		return
+	err = json.Unmarshal(client.Struct2Json(e), &req_sysConfig)
+	if err != nil {
+		return update, err
 	}
-
-	if e.ConfigName != "" && e.ConfigName != update.ConfigName {
-		return update, errors.New("参数名称不允许修改！")
+	err = client.WebApiAuth().SysConfig_Update(int32(id), &req_sysConfig, &res_sysConfig)
+	if err != nil {
+		return update, err
 	}
-
-	if e.ConfigKey != "" && e.ConfigKey != update.ConfigKey {
-		return update, errors.New("参数键名不允许修改！")
-	}
-
-	//参数1:是要修改的数据
-	//参数2:是修改的数据
-	if err = orm.Eloquent.Table(e.TableName()).Model(&update).Updates(&e).Error; err != nil {
-		return
+	err = json.Unmarshal(client.Struct2Json(res_sysConfig), &update)
+	if err != nil {
+		return update, err
 	}
 	return
 }
 
 func (e *SysConfig) Delete() (success bool, err error) {
-	if err = orm.Eloquent.Table(e.TableName()).Where("config_id = ?", e.ConfigId).Delete(&SysConfig{}).Error; err != nil {
-		success = false
-		return
+	err = json.Unmarshal(client.Struct2Json(e), &req_loginlog)
+	if err != nil {
+		return false, err
 	}
-	success = true
+	err = client.WebApiAuth().SysConfig_Delete(&req_sysConfig, &success)
+	if err != nil {
+		return false, err
+	}
 	return
 }
 
 func (e *SysConfig) BatchDelete(id []int) (Result bool, err error) {
-	if err = orm.Eloquent.Table(e.TableName()).Where("config_id in (?)", id).Delete(&SysConfig{}).Error; err != nil {
-		return
+	err = json.Unmarshal(client.Struct2Json(e), &req_sysConfig)
+	if err != nil {
+		return false, err
 	}
-	Result = true
+	err = client.WebApiAuth().SysConfig_BatchDelete(client.Ar2Int32(id), &req_sysConfig, &Result)
+	if err != nil {
+		return false, err
+	}
 	return
 }

@@ -2136,7 +2136,7 @@ func (_obj *WebApiAuth) SysConfig_UpdateOneWayWithContext(tarsCtx context.Contex
 }
 
 //SysConfig_Delete is the proxy function for the method defined in the tars file, with the context
-func (_obj *WebApiAuth) SysConfig_Delete(req *SysConfig, res *SysConfig, _opt ...map[string]string) (err error) {
+func (_obj *WebApiAuth) SysConfig_Delete(req *SysConfig, res *bool, _opt ...map[string]string) (err error) {
 
 	var length int32
 	var have bool
@@ -2147,7 +2147,7 @@ func (_obj *WebApiAuth) SysConfig_Delete(req *SysConfig, res *SysConfig, _opt ..
 		return err
 	}
 
-	err = (*res).WriteBlock(_os, 2)
+	err = _os.Write_bool((*res), 2)
 	if err != nil {
 		return err
 	}
@@ -2169,7 +2169,7 @@ func (_obj *WebApiAuth) SysConfig_Delete(req *SysConfig, res *SysConfig, _opt ..
 	}
 
 	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
-	err = (*res).ReadBlock(_is, 2, true)
+	err = _is.Read_bool(&(*res), 2, true)
 	if err != nil {
 		return err
 	}
@@ -2203,7 +2203,7 @@ func (_obj *WebApiAuth) SysConfig_Delete(req *SysConfig, res *SysConfig, _opt ..
 }
 
 //SysConfig_DeleteWithContext is the proxy function for the method defined in the tars file, with the context
-func (_obj *WebApiAuth) SysConfig_DeleteWithContext(tarsCtx context.Context, req *SysConfig, res *SysConfig, _opt ...map[string]string) (err error) {
+func (_obj *WebApiAuth) SysConfig_DeleteWithContext(tarsCtx context.Context, req *SysConfig, res *bool, _opt ...map[string]string) (err error) {
 
 	var length int32
 	var have bool
@@ -2214,7 +2214,7 @@ func (_obj *WebApiAuth) SysConfig_DeleteWithContext(tarsCtx context.Context, req
 		return err
 	}
 
-	err = (*res).WriteBlock(_os, 2)
+	err = _os.Write_bool((*res), 2)
 	if err != nil {
 		return err
 	}
@@ -2235,7 +2235,7 @@ func (_obj *WebApiAuth) SysConfig_DeleteWithContext(tarsCtx context.Context, req
 	}
 
 	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
-	err = (*res).ReadBlock(_is, 2, true)
+	err = _is.Read_bool(&(*res), 2, true)
 	if err != nil {
 		return err
 	}
@@ -2269,7 +2269,7 @@ func (_obj *WebApiAuth) SysConfig_DeleteWithContext(tarsCtx context.Context, req
 }
 
 //SysConfig_DeleteOneWayWithContext is the proxy function for the method defined in the tars file, with the context
-func (_obj *WebApiAuth) SysConfig_DeleteOneWayWithContext(tarsCtx context.Context, req *SysConfig, res *SysConfig, _opt ...map[string]string) (err error) {
+func (_obj *WebApiAuth) SysConfig_DeleteOneWayWithContext(tarsCtx context.Context, req *SysConfig, res *bool, _opt ...map[string]string) (err error) {
 
 	var length int32
 	var have bool
@@ -2280,7 +2280,7 @@ func (_obj *WebApiAuth) SysConfig_DeleteOneWayWithContext(tarsCtx context.Contex
 		return err
 	}
 
-	err = (*res).WriteBlock(_os, 2)
+	err = _os.Write_bool((*res), 2)
 	if err != nil {
 		return err
 	}
@@ -3681,7 +3681,7 @@ type _impWebApiAuth interface {
 	SysConfig_Get(req *SysConfig, res *SysConfig) (err error)
 	SysConfig_GetPage(pageSize int32, pageIndex int32, req *SysConfig, res *SysConfig_List) (err error)
 	SysConfig_Update(id int32, req *SysConfig, res *SysConfig) (err error)
-	SysConfig_Delete(req *SysConfig, res *SysConfig) (err error)
+	SysConfig_Delete(req *SysConfig, res *bool) (err error)
 	SysConfig_BatchDelete(id []int32, req *SysConfig, res *bool) (err error)
 	LoginLog_Get(req *LoginLog, res *LoginLog) (err error)
 	LoginLog_GetPage(pageSize int32, pageIndex int32, req *LoginLog, res *LoginLog_List) (err error)
@@ -3700,7 +3700,7 @@ type _impWebApiAuthWithContext interface {
 	SysConfig_Get(tarsCtx context.Context, req *SysConfig, res *SysConfig) (err error)
 	SysConfig_GetPage(tarsCtx context.Context, pageSize int32, pageIndex int32, req *SysConfig, res *SysConfig_List) (err error)
 	SysConfig_Update(tarsCtx context.Context, id int32, req *SysConfig, res *SysConfig) (err error)
-	SysConfig_Delete(tarsCtx context.Context, req *SysConfig, res *SysConfig) (err error)
+	SysConfig_Delete(tarsCtx context.Context, req *SysConfig, res *bool) (err error)
 	SysConfig_BatchDelete(tarsCtx context.Context, id []int32, req *SysConfig, res *bool) (err error)
 	LoginLog_Get(tarsCtx context.Context, req *LoginLog, res *LoginLog) (err error)
 	LoginLog_GetPage(tarsCtx context.Context, pageSize int32, pageIndex int32, req *LoginLog, res *LoginLog_List) (err error)
@@ -4848,7 +4848,7 @@ func (_obj *WebApiAuth) Dispatch(tarsCtx context.Context, _val interface{}, tars
 		}
 	case "SysConfig_Delete":
 		var req SysConfig
-		var res SysConfig
+		var res bool
 
 		if tarsReq.IVersion == basef.TARSVERSION {
 
@@ -4900,7 +4900,7 @@ func (_obj *WebApiAuth) Dispatch(tarsCtx context.Context, _val interface{}, tars
 		if tarsReq.IVersion == basef.TARSVERSION {
 			_os.Reset()
 
-			err = res.WriteBlock(_os, 2)
+			err = _os.Write_bool(res, 2)
 			if err != nil {
 				return err
 			}
@@ -4909,7 +4909,7 @@ func (_obj *WebApiAuth) Dispatch(tarsCtx context.Context, _val interface{}, tars
 			_tupRsp_ := tup.NewUniAttribute()
 
 			_os.Reset()
-			err = res.WriteBlock(_os, 0)
+			err = _os.Write_bool(res, 0)
 			if err != nil {
 				return err
 			}
