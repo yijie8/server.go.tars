@@ -4863,3 +4863,960 @@ func (st *LoginLog_List) WriteBlock(_os *codec.Buffer, tag byte) error {
 	}
 	return nil
 }
+
+// SysConfig struct implement
+type SysConfig struct {
+	ConfigId    int32  `json:"configId"`
+	ConfigName  string `json:"configName"`
+	ConfigKey   string `json:"configKey"`
+	ConfigValue string `json:"configValue"`
+	ConfigType  string `json:"configType"`
+	Remark      string `json:"remark"`
+	CreateBy    string `json:"createBy"`
+	UpdateBy    string `json:"updateBy"`
+	DataScope   string `json:"dataScope"`
+	Params      string `json:"params"`
+	CreatedAt   string `json:"createdAt"`
+	UpdatedAt   string `json:"updatedAt"`
+	DeletedAt   string `json:"deletedAt"`
+}
+
+func (st *SysConfig) ResetDefault() {
+}
+
+//ReadFrom reads  from _is and put into struct.
+func (st *SysConfig) ReadFrom(_is *codec.Reader) error {
+	var err error
+	var length int32
+	var have bool
+	var ty byte
+	st.ResetDefault()
+
+	err = _is.Read_int32(&st.ConfigId, 0, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.ConfigName, 1, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.ConfigKey, 2, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.ConfigValue, 3, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.ConfigType, 4, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.Remark, 5, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.CreateBy, 6, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.UpdateBy, 7, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.DataScope, 8, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.Params, 9, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.CreatedAt, 10, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.UpdatedAt, 11, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.DeletedAt, 12, false)
+	if err != nil {
+		return err
+	}
+
+	_ = err
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//ReadBlock reads struct from the given tag , require or optional.
+func (st *SysConfig) ReadBlock(_is *codec.Reader, tag byte, require bool) error {
+	var err error
+	var have bool
+	st.ResetDefault()
+
+	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	if err != nil {
+		return err
+	}
+	if !have {
+		if require {
+			return fmt.Errorf("require SysConfig, but not exist. tag %d", tag)
+		}
+		return nil
+	}
+
+	err = st.ReadFrom(_is)
+	if err != nil {
+		return err
+	}
+
+	err = _is.SkipToStructEnd()
+	if err != nil {
+		return err
+	}
+	_ = have
+	return nil
+}
+
+//WriteTo encode struct to buffer
+func (st *SysConfig) WriteTo(_os *codec.Buffer) error {
+	var err error
+
+	err = _os.Write_int32(st.ConfigId, 0)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.ConfigName, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.ConfigKey, 2)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.ConfigValue, 3)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.ConfigType, 4)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.Remark, 5)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.CreateBy, 6)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.UpdateBy, 7)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.DataScope, 8)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.Params, 9)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.CreatedAt, 10)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.UpdatedAt, 11)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.DeletedAt, 12)
+	if err != nil {
+		return err
+	}
+
+	_ = err
+
+	return nil
+}
+
+//WriteBlock encode struct
+func (st *SysConfig) WriteBlock(_os *codec.Buffer, tag byte) error {
+	var err error
+	err = _os.WriteHead(codec.STRUCT_BEGIN, tag)
+	if err != nil {
+		return err
+	}
+
+	err = st.WriteTo(_os)
+	if err != nil {
+		return err
+	}
+
+	err = _os.WriteHead(codec.STRUCT_END, 0)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// SysConfig_List struct implement
+type SysConfig_List struct {
+	SysConfigList []SysConfig `json:"sysConfigList"`
+	Count         int32       `json:"count"`
+}
+
+func (st *SysConfig_List) ResetDefault() {
+}
+
+//ReadFrom reads  from _is and put into struct.
+func (st *SysConfig_List) ReadFrom(_is *codec.Reader) error {
+	var err error
+	var length int32
+	var have bool
+	var ty byte
+	st.ResetDefault()
+
+	err, have, ty = _is.SkipToNoCheck(0, false)
+	if err != nil {
+		return err
+	}
+
+	if have {
+		if ty == codec.LIST {
+			err = _is.Read_int32(&length, 0, true)
+			if err != nil {
+				return err
+			}
+
+			st.SysConfigList = make([]SysConfig, length)
+			for i0, e0 := int32(0), length; i0 < e0; i0++ {
+
+				err = st.SysConfigList[i0].ReadBlock(_is, 0, false)
+				if err != nil {
+					return err
+				}
+
+			}
+		} else if ty == codec.SIMPLE_LIST {
+			err = fmt.Errorf("not support simple_list type")
+			if err != nil {
+				return err
+			}
+
+		} else {
+			err = fmt.Errorf("require vector, but not")
+			if err != nil {
+				return err
+			}
+
+		}
+	}
+
+	err = _is.Read_int32(&st.Count, 1, false)
+	if err != nil {
+		return err
+	}
+
+	_ = err
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//ReadBlock reads struct from the given tag , require or optional.
+func (st *SysConfig_List) ReadBlock(_is *codec.Reader, tag byte, require bool) error {
+	var err error
+	var have bool
+	st.ResetDefault()
+
+	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	if err != nil {
+		return err
+	}
+	if !have {
+		if require {
+			return fmt.Errorf("require SysConfig_List, but not exist. tag %d", tag)
+		}
+		return nil
+	}
+
+	err = st.ReadFrom(_is)
+	if err != nil {
+		return err
+	}
+
+	err = _is.SkipToStructEnd()
+	if err != nil {
+		return err
+	}
+	_ = have
+	return nil
+}
+
+//WriteTo encode struct to buffer
+func (st *SysConfig_List) WriteTo(_os *codec.Buffer) error {
+	var err error
+
+	err = _os.WriteHead(codec.LIST, 0)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(int32(len(st.SysConfigList)), 0)
+	if err != nil {
+		return err
+	}
+
+	for _, v := range st.SysConfigList {
+
+		err = v.WriteBlock(_os, 0)
+		if err != nil {
+			return err
+		}
+
+	}
+
+	err = _os.Write_int32(st.Count, 1)
+	if err != nil {
+		return err
+	}
+
+	_ = err
+
+	return nil
+}
+
+//WriteBlock encode struct
+func (st *SysConfig_List) WriteBlock(_os *codec.Buffer, tag byte) error {
+	var err error
+	err = _os.WriteHead(codec.STRUCT_BEGIN, tag)
+	if err != nil {
+		return err
+	}
+
+	err = st.WriteTo(_os)
+	if err != nil {
+		return err
+	}
+
+	err = _os.WriteHead(codec.STRUCT_END, 0)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// SysUser struct implement
+type SysUser struct {
+	UserId    int32  `json:"userId"`
+	NickName  string `json:"nickName"`
+	Phone     string `json:"phone"`
+	RoleId    int32  `json:"roleId"`
+	Salt      string `json:"salt"`
+	Avatar    string `json:"avatar"`
+	Sex       string `json:"sex"`
+	Email     string `json:"email"`
+	DeptId    int32  `json:"deptId"`
+	PostId    int32  `json:"postId"`
+	CreateBy  string `json:"createBy"`
+	UpdateBy  string `json:"updateBy"`
+	Remark    string `json:"remark"`
+	Status    string `json:"status"`
+	DataScope string `json:"dataScope"`
+	Params    string `json:"params"`
+	Username  string `json:"username"`
+	Password  string `json:"password"`
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
+	DeletedAt string `json:"deletedAt"`
+	Role_name string `json:"role_name"`
+	DeptName  string `json:"deptName"`
+}
+
+func (st *SysUser) ResetDefault() {
+}
+
+//ReadFrom reads  from _is and put into struct.
+func (st *SysUser) ReadFrom(_is *codec.Reader) error {
+	var err error
+	var length int32
+	var have bool
+	var ty byte
+	st.ResetDefault()
+
+	err = _is.Read_int32(&st.UserId, 0, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.NickName, 1, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.Phone, 2, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_int32(&st.RoleId, 3, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.Salt, 4, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.Avatar, 5, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.Sex, 6, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.Email, 7, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_int32(&st.DeptId, 8, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_int32(&st.PostId, 9, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.CreateBy, 10, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.UpdateBy, 11, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.Remark, 12, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.Status, 13, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.DataScope, 14, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.Params, 15, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.Username, 16, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.Password, 17, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.CreatedAt, 18, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.UpdatedAt, 19, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.DeletedAt, 20, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.Role_name, 21, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.DeptName, 22, false)
+	if err != nil {
+		return err
+	}
+
+	_ = err
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//ReadBlock reads struct from the given tag , require or optional.
+func (st *SysUser) ReadBlock(_is *codec.Reader, tag byte, require bool) error {
+	var err error
+	var have bool
+	st.ResetDefault()
+
+	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	if err != nil {
+		return err
+	}
+	if !have {
+		if require {
+			return fmt.Errorf("require SysUser, but not exist. tag %d", tag)
+		}
+		return nil
+	}
+
+	err = st.ReadFrom(_is)
+	if err != nil {
+		return err
+	}
+
+	err = _is.SkipToStructEnd()
+	if err != nil {
+		return err
+	}
+	_ = have
+	return nil
+}
+
+//WriteTo encode struct to buffer
+func (st *SysUser) WriteTo(_os *codec.Buffer) error {
+	var err error
+
+	err = _os.Write_int32(st.UserId, 0)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.NickName, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.Phone, 2)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(st.RoleId, 3)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.Salt, 4)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.Avatar, 5)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.Sex, 6)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.Email, 7)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(st.DeptId, 8)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(st.PostId, 9)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.CreateBy, 10)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.UpdateBy, 11)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.Remark, 12)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.Status, 13)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.DataScope, 14)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.Params, 15)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.Username, 16)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.Password, 17)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.CreatedAt, 18)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.UpdatedAt, 19)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.DeletedAt, 20)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.Role_name, 21)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.DeptName, 22)
+	if err != nil {
+		return err
+	}
+
+	_ = err
+
+	return nil
+}
+
+//WriteBlock encode struct
+func (st *SysUser) WriteBlock(_os *codec.Buffer, tag byte) error {
+	var err error
+	err = _os.WriteHead(codec.STRUCT_BEGIN, tag)
+	if err != nil {
+		return err
+	}
+
+	err = st.WriteTo(_os)
+	if err != nil {
+		return err
+	}
+
+	err = _os.WriteHead(codec.STRUCT_END, 0)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// SysUser_List struct implement
+type SysUser_List struct {
+	SysUserList []SysUser `json:"sysUserList"`
+	Count       int32     `json:"count"`
+}
+
+func (st *SysUser_List) ResetDefault() {
+}
+
+//ReadFrom reads  from _is and put into struct.
+func (st *SysUser_List) ReadFrom(_is *codec.Reader) error {
+	var err error
+	var length int32
+	var have bool
+	var ty byte
+	st.ResetDefault()
+
+	err, have, ty = _is.SkipToNoCheck(0, false)
+	if err != nil {
+		return err
+	}
+
+	if have {
+		if ty == codec.LIST {
+			err = _is.Read_int32(&length, 0, true)
+			if err != nil {
+				return err
+			}
+
+			st.SysUserList = make([]SysUser, length)
+			for i0, e0 := int32(0), length; i0 < e0; i0++ {
+
+				err = st.SysUserList[i0].ReadBlock(_is, 0, false)
+				if err != nil {
+					return err
+				}
+
+			}
+		} else if ty == codec.SIMPLE_LIST {
+			err = fmt.Errorf("not support simple_list type")
+			if err != nil {
+				return err
+			}
+
+		} else {
+			err = fmt.Errorf("require vector, but not")
+			if err != nil {
+				return err
+			}
+
+		}
+	}
+
+	err = _is.Read_int32(&st.Count, 1, false)
+	if err != nil {
+		return err
+	}
+
+	_ = err
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//ReadBlock reads struct from the given tag , require or optional.
+func (st *SysUser_List) ReadBlock(_is *codec.Reader, tag byte, require bool) error {
+	var err error
+	var have bool
+	st.ResetDefault()
+
+	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	if err != nil {
+		return err
+	}
+	if !have {
+		if require {
+			return fmt.Errorf("require SysUser_List, but not exist. tag %d", tag)
+		}
+		return nil
+	}
+
+	err = st.ReadFrom(_is)
+	if err != nil {
+		return err
+	}
+
+	err = _is.SkipToStructEnd()
+	if err != nil {
+		return err
+	}
+	_ = have
+	return nil
+}
+
+//WriteTo encode struct to buffer
+func (st *SysUser_List) WriteTo(_os *codec.Buffer) error {
+	var err error
+
+	err = _os.WriteHead(codec.LIST, 0)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(int32(len(st.SysUserList)), 0)
+	if err != nil {
+		return err
+	}
+
+	for _, v := range st.SysUserList {
+
+		err = v.WriteBlock(_os, 0)
+		if err != nil {
+			return err
+		}
+
+	}
+
+	err = _os.Write_int32(st.Count, 1)
+	if err != nil {
+		return err
+	}
+
+	_ = err
+
+	return nil
+}
+
+//WriteBlock encode struct
+func (st *SysUser_List) WriteBlock(_os *codec.Buffer, tag byte) error {
+	var err error
+	err = _os.WriteHead(codec.STRUCT_BEGIN, tag)
+	if err != nil {
+		return err
+	}
+
+	err = st.WriteTo(_os)
+	if err != nil {
+		return err
+	}
+
+	err = _os.WriteHead(codec.STRUCT_END, 0)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// SysUserPwd struct implement
+type SysUserPwd struct {
+	OldPassword string `json:"oldPassword"`
+	NewPassword string `json:"newPassword"`
+}
+
+func (st *SysUserPwd) ResetDefault() {
+}
+
+//ReadFrom reads  from _is and put into struct.
+func (st *SysUserPwd) ReadFrom(_is *codec.Reader) error {
+	var err error
+	var length int32
+	var have bool
+	var ty byte
+	st.ResetDefault()
+
+	err = _is.Read_string(&st.OldPassword, 0, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.NewPassword, 1, false)
+	if err != nil {
+		return err
+	}
+
+	_ = err
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//ReadBlock reads struct from the given tag , require or optional.
+func (st *SysUserPwd) ReadBlock(_is *codec.Reader, tag byte, require bool) error {
+	var err error
+	var have bool
+	st.ResetDefault()
+
+	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	if err != nil {
+		return err
+	}
+	if !have {
+		if require {
+			return fmt.Errorf("require SysUserPwd, but not exist. tag %d", tag)
+		}
+		return nil
+	}
+
+	err = st.ReadFrom(_is)
+	if err != nil {
+		return err
+	}
+
+	err = _is.SkipToStructEnd()
+	if err != nil {
+		return err
+	}
+	_ = have
+	return nil
+}
+
+//WriteTo encode struct to buffer
+func (st *SysUserPwd) WriteTo(_os *codec.Buffer) error {
+	var err error
+
+	err = _os.Write_string(st.OldPassword, 0)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.NewPassword, 1)
+	if err != nil {
+		return err
+	}
+
+	_ = err
+
+	return nil
+}
+
+//WriteBlock encode struct
+func (st *SysUserPwd) WriteBlock(_os *codec.Buffer, tag byte) error {
+	var err error
+	err = _os.WriteHead(codec.STRUCT_BEGIN, tag)
+	if err != nil {
+		return err
+	}
+
+	err = st.WriteTo(_os)
+	if err != nil {
+		return err
+	}
+
+	err = _os.WriteHead(codec.STRUCT_END, 0)
+	if err != nil {
+		return err
+	}
+	return nil
+}

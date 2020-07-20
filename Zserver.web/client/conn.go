@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"github.com/TarsCloud/TarsGo/tars"
 	"github.com/yijie8/zserver/tools"
+	"log"
 )
 
 var Conn *tars.Communicator
@@ -16,6 +17,7 @@ func init() {
 
 func WebApiNoAuth() *Zserver.WebApiNoAuth {
 	Obj = tools.Conn_server("Zserver.WebApiNoAuth.TcpObj", "", Conn)
+	log.Println(Obj)
 	App := new(Zserver.WebApiNoAuth)
 	Conn.StringToProxy(Obj, App)
 	return App
@@ -23,6 +25,7 @@ func WebApiNoAuth() *Zserver.WebApiNoAuth {
 
 func WebApiAuth() *Zserver.WebApiAuth {
 	Obj = tools.Conn_server("Zserver.WebApiAuth.TcpObj", "10015", Conn)
+	log.Println(Obj)
 	//Obj = fmt.Sprintf("%v@tcp -h 127.0.0.1 -p %v -t 60000", Obj, "10015")
 	App := new(Zserver.WebApiAuth)
 	Conn.StringToProxy(Obj, App)

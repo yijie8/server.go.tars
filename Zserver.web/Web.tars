@@ -284,7 +284,8 @@ module Zserver
 
 
 
-	struct LoginLog {
+
+    struct LoginLog {
         0 optional int       infoId; //主键
         1 optional string    username;       //用户名
         2 optional string    status;               //状态
@@ -309,16 +310,86 @@ module Zserver
          1 optional int  count;
     };
 
-
-
-    interface WebApiAuth
-    {
-        void LoginLog_Get(LoginLog req,out LoginLog res);
-        void LoginLog_GetPage(int pageSize,int pageIndex,LoginLog req,out LoginLog_List res);
-        void LoginLog_Create(LoginLog req,out LoginLog res);
-        void LoginLog_Update(int id,LoginLog req,out LoginLog res);
-        void LoginLog_BatchDelete(vector<int> id,LoginLog req,out bool res);
+    struct SysConfig {
+    	0 optional     int    configId; //编码
+    	1 optional   string configName;        //参数名称
+    	2 optional    string configKey;         //参数键名
+    	3 optional  string configValue;       //参数键值
+    	4 optional   string configType;         //是否系统内置
+    	5 optional       string remark;            //备注
+    	6 optional     string createBy;
+    	7 optional     string updateBy;
+    	8 optional    string dataScope;
+    	9 optional       string params;
+        10 optional string createdAt;
+        11 optional string updatedAt;
+        12 optional string deletedAt;
     };
+
+    struct SysConfig_List {
+         0 optional vector<SysConfig> sysConfigList;
+         1 optional int  count;
+    };
+
+    struct SysUser {
+      0 optional  int userId; // 编码
+      1 optional   string nickName; // 昵称
+      2 optional      string phone;     // 手机号
+      3 optional     int    roleId;        // 角色编码
+      4 optional       string salt;     //盐
+      5 optional     string avatar;   //头像
+      6 optional        string sex;      //性别
+      7 optional      string email;    //邮箱
+      8 optional     int    deptId;        //部门编码
+      9 optional     int    postId;        //职位编码
+      10 optional   string createBy; //
+      11 optional   string updateBy; //
+      12 optional     string remark;   //备注
+      13 optional     string status;
+      14 optional  string dataScope;
+      15 optional     string params;
+      16 optional  string username;
+      17 optional  string password;
+      18 optional  string  createdAt;
+      19 optional  string  updatedAt;
+      20 optional  string deletedAt;
+
+      21 optional  string role_name;
+      22 optional string deptName;
+    };
+    struct SysUser_List {
+         0 optional vector<SysUser> sysUserList;
+         1 optional int  count;
+    };
+    struct SysUserPwd {
+    	0 optional string oldPassword;
+    	1 optional string newPassword;
+    };
+
+
+	interface WebApiAuth
+	{
+		void SysUser_Get(SysUser req,out SysUser res);
+	    void SysUser_GetPage(int pageSize,int pageIndex,SysUser req,out SysUser_List res);
+	    void SysUser_Insert(SysUser req,out int id);
+	    void SysUser_Update(int id,SysUser req,out SysUser res);
+	    void SysUser_BatchDelete(vector<int> id,SysUser req,out bool res);
+	    void SysUser_SetPwd(string oldPassword,string newPassword,SysUser req,out bool res);
+
+
+	    void SysConfig_Create(SysConfig req,out SysConfig res);
+	    void SysConfig_Get(SysConfig req,out SysConfig res);
+	    void SysConfig_GetPage(int pageSize,int pageIndex,SysConfig req,out SysConfig_List res);
+	    void SysConfig_Update(int id,SysConfig req,out SysConfig res);
+	    void SysConfig_Delete(SysConfig req,out SysConfig res);
+	    void SysConfig_BatchDelete(vector<int> id,SysConfig req,out bool res);
+
+	    void LoginLog_Get(LoginLog req,out LoginLog res);
+	    void LoginLog_GetPage(int pageSize,int pageIndex,LoginLog req,out LoginLog_List res);
+	    void LoginLog_Create(LoginLog req,out LoginLog res);
+	    void LoginLog_Update(int id,LoginLog req,out LoginLog res);
+	    void LoginLog_BatchDelete(vector<int> id,LoginLog req,out bool res);
+	};
 
 
 

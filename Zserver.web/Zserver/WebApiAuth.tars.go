@@ -28,6 +28,2556 @@ type WebApiAuth struct {
 	s m.Servant
 }
 
+//SysUser_Get is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_Get(req *SysUser, res *SysUser, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = req.WriteBlock(_os, 1)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+	tarsCtx := context.Background()
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysUser_Get", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = (*res).ReadBlock(_is, 2, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_GetWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_GetWithContext(tarsCtx context.Context, req *SysUser, res *SysUser, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = req.WriteBlock(_os, 1)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysUser_Get", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = (*res).ReadBlock(_is, 2, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_GetOneWayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_GetOneWayWithContext(tarsCtx context.Context, req *SysUser, res *SysUser, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = req.WriteBlock(_os, 1)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 1, "SysUser_Get", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_GetPage is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_GetPage(pageSize int32, pageIndex int32, req *SysUser, res *SysUser_List, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.Write_int32(pageSize, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(pageIndex, 2)
+	if err != nil {
+		return err
+	}
+
+	err = req.WriteBlock(_os, 3)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 4)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+	tarsCtx := context.Background()
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysUser_GetPage", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = (*res).ReadBlock(_is, 4, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_GetPageWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_GetPageWithContext(tarsCtx context.Context, pageSize int32, pageIndex int32, req *SysUser, res *SysUser_List, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.Write_int32(pageSize, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(pageIndex, 2)
+	if err != nil {
+		return err
+	}
+
+	err = req.WriteBlock(_os, 3)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 4)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysUser_GetPage", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = (*res).ReadBlock(_is, 4, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_GetPageOneWayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_GetPageOneWayWithContext(tarsCtx context.Context, pageSize int32, pageIndex int32, req *SysUser, res *SysUser_List, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.Write_int32(pageSize, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(pageIndex, 2)
+	if err != nil {
+		return err
+	}
+
+	err = req.WriteBlock(_os, 3)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 4)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 1, "SysUser_GetPage", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_Insert is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_Insert(req *SysUser, id *int32, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = req.WriteBlock(_os, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32((*id), 2)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+	tarsCtx := context.Background()
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysUser_Insert", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = _is.Read_int32(&(*id), 2, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_InsertWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_InsertWithContext(tarsCtx context.Context, req *SysUser, id *int32, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = req.WriteBlock(_os, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32((*id), 2)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysUser_Insert", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = _is.Read_int32(&(*id), 2, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_InsertOneWayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_InsertOneWayWithContext(tarsCtx context.Context, req *SysUser, id *int32, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = req.WriteBlock(_os, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32((*id), 2)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 1, "SysUser_Insert", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_Update is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_Update(id int32, req *SysUser, res *SysUser, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.Write_int32(id, 1)
+	if err != nil {
+		return err
+	}
+
+	err = req.WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 3)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+	tarsCtx := context.Background()
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysUser_Update", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = (*res).ReadBlock(_is, 3, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_UpdateWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_UpdateWithContext(tarsCtx context.Context, id int32, req *SysUser, res *SysUser, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.Write_int32(id, 1)
+	if err != nil {
+		return err
+	}
+
+	err = req.WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 3)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysUser_Update", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = (*res).ReadBlock(_is, 3, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_UpdateOneWayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_UpdateOneWayWithContext(tarsCtx context.Context, id int32, req *SysUser, res *SysUser, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.Write_int32(id, 1)
+	if err != nil {
+		return err
+	}
+
+	err = req.WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 3)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 1, "SysUser_Update", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_BatchDelete is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_BatchDelete(id []int32, req *SysUser, res *bool, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.WriteHead(codec.LIST, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(int32(len(id)), 0)
+	if err != nil {
+		return err
+	}
+
+	for _, v := range id {
+
+		err = _os.Write_int32(v, 0)
+		if err != nil {
+			return err
+		}
+
+	}
+
+	err = req.WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_bool((*res), 3)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+	tarsCtx := context.Background()
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysUser_BatchDelete", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = _is.Read_bool(&(*res), 3, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_BatchDeleteWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_BatchDeleteWithContext(tarsCtx context.Context, id []int32, req *SysUser, res *bool, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.WriteHead(codec.LIST, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(int32(len(id)), 0)
+	if err != nil {
+		return err
+	}
+
+	for _, v := range id {
+
+		err = _os.Write_int32(v, 0)
+		if err != nil {
+			return err
+		}
+
+	}
+
+	err = req.WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_bool((*res), 3)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysUser_BatchDelete", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = _is.Read_bool(&(*res), 3, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_BatchDeleteOneWayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_BatchDeleteOneWayWithContext(tarsCtx context.Context, id []int32, req *SysUser, res *bool, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.WriteHead(codec.LIST, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(int32(len(id)), 0)
+	if err != nil {
+		return err
+	}
+
+	for _, v := range id {
+
+		err = _os.Write_int32(v, 0)
+		if err != nil {
+			return err
+		}
+
+	}
+
+	err = req.WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_bool((*res), 3)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 1, "SysUser_BatchDelete", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_SetPwd is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_SetPwd(oldPassword string, newPassword string, req *SysUser, res *bool, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.Write_string(oldPassword, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(newPassword, 2)
+	if err != nil {
+		return err
+	}
+
+	err = req.WriteBlock(_os, 3)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_bool((*res), 4)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+	tarsCtx := context.Background()
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysUser_SetPwd", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = _is.Read_bool(&(*res), 4, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_SetPwdWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_SetPwdWithContext(tarsCtx context.Context, oldPassword string, newPassword string, req *SysUser, res *bool, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.Write_string(oldPassword, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(newPassword, 2)
+	if err != nil {
+		return err
+	}
+
+	err = req.WriteBlock(_os, 3)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_bool((*res), 4)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysUser_SetPwd", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = _is.Read_bool(&(*res), 4, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysUser_SetPwdOneWayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysUser_SetPwdOneWayWithContext(tarsCtx context.Context, oldPassword string, newPassword string, req *SysUser, res *bool, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.Write_string(oldPassword, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(newPassword, 2)
+	if err != nil {
+		return err
+	}
+
+	err = req.WriteBlock(_os, 3)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_bool((*res), 4)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 1, "SysUser_SetPwd", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_Create is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_Create(req *SysConfig, res *SysConfig, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = req.WriteBlock(_os, 1)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+	tarsCtx := context.Background()
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysConfig_Create", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = (*res).ReadBlock(_is, 2, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_CreateWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_CreateWithContext(tarsCtx context.Context, req *SysConfig, res *SysConfig, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = req.WriteBlock(_os, 1)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysConfig_Create", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = (*res).ReadBlock(_is, 2, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_CreateOneWayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_CreateOneWayWithContext(tarsCtx context.Context, req *SysConfig, res *SysConfig, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = req.WriteBlock(_os, 1)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 1, "SysConfig_Create", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_Get is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_Get(req *SysConfig, res *SysConfig, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = req.WriteBlock(_os, 1)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+	tarsCtx := context.Background()
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysConfig_Get", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = (*res).ReadBlock(_is, 2, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_GetWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_GetWithContext(tarsCtx context.Context, req *SysConfig, res *SysConfig, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = req.WriteBlock(_os, 1)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysConfig_Get", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = (*res).ReadBlock(_is, 2, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_GetOneWayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_GetOneWayWithContext(tarsCtx context.Context, req *SysConfig, res *SysConfig, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = req.WriteBlock(_os, 1)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 1, "SysConfig_Get", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_GetPage is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_GetPage(pageSize int32, pageIndex int32, req *SysConfig, res *SysConfig_List, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.Write_int32(pageSize, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(pageIndex, 2)
+	if err != nil {
+		return err
+	}
+
+	err = req.WriteBlock(_os, 3)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 4)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+	tarsCtx := context.Background()
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysConfig_GetPage", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = (*res).ReadBlock(_is, 4, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_GetPageWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_GetPageWithContext(tarsCtx context.Context, pageSize int32, pageIndex int32, req *SysConfig, res *SysConfig_List, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.Write_int32(pageSize, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(pageIndex, 2)
+	if err != nil {
+		return err
+	}
+
+	err = req.WriteBlock(_os, 3)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 4)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysConfig_GetPage", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = (*res).ReadBlock(_is, 4, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_GetPageOneWayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_GetPageOneWayWithContext(tarsCtx context.Context, pageSize int32, pageIndex int32, req *SysConfig, res *SysConfig_List, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.Write_int32(pageSize, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(pageIndex, 2)
+	if err != nil {
+		return err
+	}
+
+	err = req.WriteBlock(_os, 3)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 4)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 1, "SysConfig_GetPage", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_Update is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_Update(id int32, req *SysConfig, res *SysConfig, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.Write_int32(id, 1)
+	if err != nil {
+		return err
+	}
+
+	err = req.WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 3)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+	tarsCtx := context.Background()
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysConfig_Update", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = (*res).ReadBlock(_is, 3, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_UpdateWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_UpdateWithContext(tarsCtx context.Context, id int32, req *SysConfig, res *SysConfig, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.Write_int32(id, 1)
+	if err != nil {
+		return err
+	}
+
+	err = req.WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 3)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysConfig_Update", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = (*res).ReadBlock(_is, 3, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_UpdateOneWayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_UpdateOneWayWithContext(tarsCtx context.Context, id int32, req *SysConfig, res *SysConfig, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.Write_int32(id, 1)
+	if err != nil {
+		return err
+	}
+
+	err = req.WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 3)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 1, "SysConfig_Update", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_Delete is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_Delete(req *SysConfig, res *SysConfig, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = req.WriteBlock(_os, 1)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+	tarsCtx := context.Background()
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysConfig_Delete", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = (*res).ReadBlock(_is, 2, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_DeleteWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_DeleteWithContext(tarsCtx context.Context, req *SysConfig, res *SysConfig, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = req.WriteBlock(_os, 1)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysConfig_Delete", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = (*res).ReadBlock(_is, 2, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_DeleteOneWayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_DeleteOneWayWithContext(tarsCtx context.Context, req *SysConfig, res *SysConfig, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = req.WriteBlock(_os, 1)
+	if err != nil {
+		return err
+	}
+
+	err = (*res).WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 1, "SysConfig_Delete", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_BatchDelete is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_BatchDelete(id []int32, req *SysConfig, res *bool, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.WriteHead(codec.LIST, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(int32(len(id)), 0)
+	if err != nil {
+		return err
+	}
+
+	for _, v := range id {
+
+		err = _os.Write_int32(v, 0)
+		if err != nil {
+			return err
+		}
+
+	}
+
+	err = req.WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_bool((*res), 3)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+	tarsCtx := context.Background()
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysConfig_BatchDelete", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = _is.Read_bool(&(*res), 3, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_BatchDeleteWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_BatchDeleteWithContext(tarsCtx context.Context, id []int32, req *SysConfig, res *bool, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.WriteHead(codec.LIST, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(int32(len(id)), 0)
+	if err != nil {
+		return err
+	}
+
+	for _, v := range id {
+
+		err = _os.Write_int32(v, 0)
+		if err != nil {
+			return err
+		}
+
+	}
+
+	err = req.WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_bool((*res), 3)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "SysConfig_BatchDelete", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = _is.Read_bool(&(*res), 3, true)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//SysConfig_BatchDeleteOneWayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *WebApiAuth) SysConfig_BatchDeleteOneWayWithContext(tarsCtx context.Context, id []int32, req *SysConfig, res *bool, _opt ...map[string]string) (err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = _os.WriteHead(codec.LIST, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(int32(len(id)), 0)
+	if err != nil {
+		return err
+	}
+
+	for _, v := range id {
+
+		err = _os.Write_int32(v, 0)
+		if err != nil {
+			return err
+		}
+
+	}
+
+	err = req.WriteBlock(_os, 2)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_bool((*res), 3)
+	if err != nil {
+		return err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 1, "SysConfig_BatchDelete", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
 //LoginLog_Get is the proxy function for the method defined in the tars file, with the context
 func (_obj *WebApiAuth) LoginLog_Get(req *LoginLog, res *LoginLog, _opt ...map[string]string) (err error) {
 
@@ -1121,6 +3671,18 @@ func (_obj *WebApiAuth) AddServantWithContext(imp _impWebApiAuthWithContext, obj
 }
 
 type _impWebApiAuth interface {
+	SysUser_Get(req *SysUser, res *SysUser) (err error)
+	SysUser_GetPage(pageSize int32, pageIndex int32, req *SysUser, res *SysUser_List) (err error)
+	SysUser_Insert(req *SysUser, id *int32) (err error)
+	SysUser_Update(id int32, req *SysUser, res *SysUser) (err error)
+	SysUser_BatchDelete(id []int32, req *SysUser, res *bool) (err error)
+	SysUser_SetPwd(oldPassword string, newPassword string, req *SysUser, res *bool) (err error)
+	SysConfig_Create(req *SysConfig, res *SysConfig) (err error)
+	SysConfig_Get(req *SysConfig, res *SysConfig) (err error)
+	SysConfig_GetPage(pageSize int32, pageIndex int32, req *SysConfig, res *SysConfig_List) (err error)
+	SysConfig_Update(id int32, req *SysConfig, res *SysConfig) (err error)
+	SysConfig_Delete(req *SysConfig, res *SysConfig) (err error)
+	SysConfig_BatchDelete(id []int32, req *SysConfig, res *bool) (err error)
 	LoginLog_Get(req *LoginLog, res *LoginLog) (err error)
 	LoginLog_GetPage(pageSize int32, pageIndex int32, req *LoginLog, res *LoginLog_List) (err error)
 	LoginLog_Create(req *LoginLog, res *LoginLog) (err error)
@@ -1128,6 +3690,18 @@ type _impWebApiAuth interface {
 	LoginLog_BatchDelete(id []int32, req *LoginLog, res *bool) (err error)
 }
 type _impWebApiAuthWithContext interface {
+	SysUser_Get(tarsCtx context.Context, req *SysUser, res *SysUser) (err error)
+	SysUser_GetPage(tarsCtx context.Context, pageSize int32, pageIndex int32, req *SysUser, res *SysUser_List) (err error)
+	SysUser_Insert(tarsCtx context.Context, req *SysUser, id *int32) (err error)
+	SysUser_Update(tarsCtx context.Context, id int32, req *SysUser, res *SysUser) (err error)
+	SysUser_BatchDelete(tarsCtx context.Context, id []int32, req *SysUser, res *bool) (err error)
+	SysUser_SetPwd(tarsCtx context.Context, oldPassword string, newPassword string, req *SysUser, res *bool) (err error)
+	SysConfig_Create(tarsCtx context.Context, req *SysConfig, res *SysConfig) (err error)
+	SysConfig_Get(tarsCtx context.Context, req *SysConfig, res *SysConfig) (err error)
+	SysConfig_GetPage(tarsCtx context.Context, pageSize int32, pageIndex int32, req *SysConfig, res *SysConfig_List) (err error)
+	SysConfig_Update(tarsCtx context.Context, id int32, req *SysConfig, res *SysConfig) (err error)
+	SysConfig_Delete(tarsCtx context.Context, req *SysConfig, res *SysConfig) (err error)
+	SysConfig_BatchDelete(tarsCtx context.Context, id []int32, req *SysConfig, res *bool) (err error)
 	LoginLog_Get(tarsCtx context.Context, req *LoginLog, res *LoginLog) (err error)
 	LoginLog_GetPage(tarsCtx context.Context, pageSize int32, pageIndex int32, req *LoginLog, res *LoginLog_List) (err error)
 	LoginLog_Create(tarsCtx context.Context, req *LoginLog, res *LoginLog) (err error)
@@ -1143,6 +3717,1392 @@ func (_obj *WebApiAuth) Dispatch(tarsCtx context.Context, _val interface{}, tars
 	_is := codec.NewReader(tools.Int8ToByte(tarsReq.SBuffer))
 	_os := codec.NewBuffer()
 	switch tarsReq.SFuncName {
+	case "SysUser_Get":
+		var req SysUser
+		var res SysUser
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+
+			err = req.ReadBlock(_is, 1, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_reqTup_ := tup.NewUniAttribute()
+			_reqTup_.Decode(_is)
+
+			var _tupBuffer_ []byte
+
+			_reqTup_.GetBuffer("req", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = req.ReadBlock(_is, 0, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			var _jsonDat_ map[string]interface{}
+			err = json.Unmarshal(_is.ToBytes(), &_jsonDat_)
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["req"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &req); err != nil {
+					return err
+				}
+			}
+
+		} else {
+			err = fmt.Errorf("Decode reqpacket fail, error version:", tarsReq.IVersion)
+			return err
+		}
+
+		if _withContext == false {
+			_imp := _val.(_impWebApiAuth)
+			err = _imp.SysUser_Get(&req, &res)
+		} else {
+			_imp := _val.(_impWebApiAuthWithContext)
+			err = _imp.SysUser_Get(tarsCtx, &req, &res)
+		}
+
+		if err != nil {
+			return err
+		}
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+			_os.Reset()
+
+			err = res.WriteBlock(_os, 2)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_tupRsp_ := tup.NewUniAttribute()
+
+			_os.Reset()
+			err = res.WriteBlock(_os, 0)
+			if err != nil {
+				return err
+			}
+
+			_tupRsp_.PutBuffer("res", _os.ToBytes())
+
+			_os.Reset()
+			err = _tupRsp_.Encode(_os)
+			if err != nil {
+				return err
+			}
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			_rspJson_ := map[string]interface{}{}
+			_rspJson_["res"] = res
+
+			var _rspByte_ []byte
+			if _rspByte_, err = json.Marshal(_rspJson_); err != nil {
+				return err
+			}
+
+			_os.Reset()
+			err = _os.Write_slice_uint8(_rspByte_)
+			if err != nil {
+				return err
+			}
+		}
+	case "SysUser_GetPage":
+		var pageSize int32
+		var pageIndex int32
+		var req SysUser
+		var res SysUser_List
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+
+			err = _is.Read_int32(&pageSize, 1, true)
+			if err != nil {
+				return err
+			}
+
+			err = _is.Read_int32(&pageIndex, 2, true)
+			if err != nil {
+				return err
+			}
+
+			err = req.ReadBlock(_is, 3, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_reqTup_ := tup.NewUniAttribute()
+			_reqTup_.Decode(_is)
+
+			var _tupBuffer_ []byte
+
+			_reqTup_.GetBuffer("pageSize", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = _is.Read_int32(&pageSize, 0, true)
+			if err != nil {
+				return err
+			}
+
+			_reqTup_.GetBuffer("pageIndex", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = _is.Read_int32(&pageIndex, 0, true)
+			if err != nil {
+				return err
+			}
+
+			_reqTup_.GetBuffer("req", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = req.ReadBlock(_is, 0, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			var _jsonDat_ map[string]interface{}
+			err = json.Unmarshal(_is.ToBytes(), &_jsonDat_)
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["pageSize"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &pageSize); err != nil {
+					return err
+				}
+			}
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["pageIndex"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &pageIndex); err != nil {
+					return err
+				}
+			}
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["req"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &req); err != nil {
+					return err
+				}
+			}
+
+		} else {
+			err = fmt.Errorf("Decode reqpacket fail, error version:", tarsReq.IVersion)
+			return err
+		}
+
+		if _withContext == false {
+			_imp := _val.(_impWebApiAuth)
+			err = _imp.SysUser_GetPage(pageSize, pageIndex, &req, &res)
+		} else {
+			_imp := _val.(_impWebApiAuthWithContext)
+			err = _imp.SysUser_GetPage(tarsCtx, pageSize, pageIndex, &req, &res)
+		}
+
+		if err != nil {
+			return err
+		}
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+			_os.Reset()
+
+			err = res.WriteBlock(_os, 4)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_tupRsp_ := tup.NewUniAttribute()
+
+			_os.Reset()
+			err = res.WriteBlock(_os, 0)
+			if err != nil {
+				return err
+			}
+
+			_tupRsp_.PutBuffer("res", _os.ToBytes())
+
+			_os.Reset()
+			err = _tupRsp_.Encode(_os)
+			if err != nil {
+				return err
+			}
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			_rspJson_ := map[string]interface{}{}
+			_rspJson_["res"] = res
+
+			var _rspByte_ []byte
+			if _rspByte_, err = json.Marshal(_rspJson_); err != nil {
+				return err
+			}
+
+			_os.Reset()
+			err = _os.Write_slice_uint8(_rspByte_)
+			if err != nil {
+				return err
+			}
+		}
+	case "SysUser_Insert":
+		var req SysUser
+		var id int32
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+
+			err = req.ReadBlock(_is, 1, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_reqTup_ := tup.NewUniAttribute()
+			_reqTup_.Decode(_is)
+
+			var _tupBuffer_ []byte
+
+			_reqTup_.GetBuffer("req", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = req.ReadBlock(_is, 0, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			var _jsonDat_ map[string]interface{}
+			err = json.Unmarshal(_is.ToBytes(), &_jsonDat_)
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["req"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &req); err != nil {
+					return err
+				}
+			}
+
+		} else {
+			err = fmt.Errorf("Decode reqpacket fail, error version:", tarsReq.IVersion)
+			return err
+		}
+
+		if _withContext == false {
+			_imp := _val.(_impWebApiAuth)
+			err = _imp.SysUser_Insert(&req, &id)
+		} else {
+			_imp := _val.(_impWebApiAuthWithContext)
+			err = _imp.SysUser_Insert(tarsCtx, &req, &id)
+		}
+
+		if err != nil {
+			return err
+		}
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+			_os.Reset()
+
+			err = _os.Write_int32(id, 2)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_tupRsp_ := tup.NewUniAttribute()
+
+			_os.Reset()
+			err = _os.Write_int32(id, 0)
+			if err != nil {
+				return err
+			}
+
+			_tupRsp_.PutBuffer("id", _os.ToBytes())
+
+			_os.Reset()
+			err = _tupRsp_.Encode(_os)
+			if err != nil {
+				return err
+			}
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			_rspJson_ := map[string]interface{}{}
+			_rspJson_["id"] = id
+
+			var _rspByte_ []byte
+			if _rspByte_, err = json.Marshal(_rspJson_); err != nil {
+				return err
+			}
+
+			_os.Reset()
+			err = _os.Write_slice_uint8(_rspByte_)
+			if err != nil {
+				return err
+			}
+		}
+	case "SysUser_Update":
+		var id int32
+		var req SysUser
+		var res SysUser
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+
+			err = _is.Read_int32(&id, 1, true)
+			if err != nil {
+				return err
+			}
+
+			err = req.ReadBlock(_is, 2, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_reqTup_ := tup.NewUniAttribute()
+			_reqTup_.Decode(_is)
+
+			var _tupBuffer_ []byte
+
+			_reqTup_.GetBuffer("id", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = _is.Read_int32(&id, 0, true)
+			if err != nil {
+				return err
+			}
+
+			_reqTup_.GetBuffer("req", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = req.ReadBlock(_is, 0, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			var _jsonDat_ map[string]interface{}
+			err = json.Unmarshal(_is.ToBytes(), &_jsonDat_)
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["id"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &id); err != nil {
+					return err
+				}
+			}
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["req"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &req); err != nil {
+					return err
+				}
+			}
+
+		} else {
+			err = fmt.Errorf("Decode reqpacket fail, error version:", tarsReq.IVersion)
+			return err
+		}
+
+		if _withContext == false {
+			_imp := _val.(_impWebApiAuth)
+			err = _imp.SysUser_Update(id, &req, &res)
+		} else {
+			_imp := _val.(_impWebApiAuthWithContext)
+			err = _imp.SysUser_Update(tarsCtx, id, &req, &res)
+		}
+
+		if err != nil {
+			return err
+		}
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+			_os.Reset()
+
+			err = res.WriteBlock(_os, 3)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_tupRsp_ := tup.NewUniAttribute()
+
+			_os.Reset()
+			err = res.WriteBlock(_os, 0)
+			if err != nil {
+				return err
+			}
+
+			_tupRsp_.PutBuffer("res", _os.ToBytes())
+
+			_os.Reset()
+			err = _tupRsp_.Encode(_os)
+			if err != nil {
+				return err
+			}
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			_rspJson_ := map[string]interface{}{}
+			_rspJson_["res"] = res
+
+			var _rspByte_ []byte
+			if _rspByte_, err = json.Marshal(_rspJson_); err != nil {
+				return err
+			}
+
+			_os.Reset()
+			err = _os.Write_slice_uint8(_rspByte_)
+			if err != nil {
+				return err
+			}
+		}
+	case "SysUser_BatchDelete":
+		var id []int32
+		var req SysUser
+		var res bool
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+
+			err, have, ty = _is.SkipToNoCheck(1, true)
+			if err != nil {
+				return err
+			}
+
+			if ty == codec.LIST {
+				err = _is.Read_int32(&length, 0, true)
+				if err != nil {
+					return err
+				}
+
+				id = make([]int32, length)
+				for i0, e0 := int32(0), length; i0 < e0; i0++ {
+
+					err = _is.Read_int32(&id[i0], 0, false)
+					if err != nil {
+						return err
+					}
+
+				}
+			} else if ty == codec.SIMPLE_LIST {
+				err = fmt.Errorf("not support simple_list type")
+				if err != nil {
+					return err
+				}
+
+			} else {
+				err = fmt.Errorf("require vector, but not")
+				if err != nil {
+					return err
+				}
+
+			}
+
+			err = req.ReadBlock(_is, 2, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_reqTup_ := tup.NewUniAttribute()
+			_reqTup_.Decode(_is)
+
+			var _tupBuffer_ []byte
+
+			_reqTup_.GetBuffer("id", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err, have, ty = _is.SkipToNoCheck(0, true)
+			if err != nil {
+				return err
+			}
+
+			if ty == codec.LIST {
+				err = _is.Read_int32(&length, 0, true)
+				if err != nil {
+					return err
+				}
+
+				id = make([]int32, length)
+				for i1, e1 := int32(0), length; i1 < e1; i1++ {
+
+					err = _is.Read_int32(&id[i1], 0, false)
+					if err != nil {
+						return err
+					}
+
+				}
+			} else if ty == codec.SIMPLE_LIST {
+				err = fmt.Errorf("not support simple_list type")
+				if err != nil {
+					return err
+				}
+
+			} else {
+				err = fmt.Errorf("require vector, but not")
+				if err != nil {
+					return err
+				}
+
+			}
+
+			_reqTup_.GetBuffer("req", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = req.ReadBlock(_is, 0, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			var _jsonDat_ map[string]interface{}
+			err = json.Unmarshal(_is.ToBytes(), &_jsonDat_)
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["id"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &id); err != nil {
+					return err
+				}
+			}
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["req"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &req); err != nil {
+					return err
+				}
+			}
+
+		} else {
+			err = fmt.Errorf("Decode reqpacket fail, error version:", tarsReq.IVersion)
+			return err
+		}
+
+		if _withContext == false {
+			_imp := _val.(_impWebApiAuth)
+			err = _imp.SysUser_BatchDelete(id, &req, &res)
+		} else {
+			_imp := _val.(_impWebApiAuthWithContext)
+			err = _imp.SysUser_BatchDelete(tarsCtx, id, &req, &res)
+		}
+
+		if err != nil {
+			return err
+		}
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+			_os.Reset()
+
+			err = _os.Write_bool(res, 3)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_tupRsp_ := tup.NewUniAttribute()
+
+			_os.Reset()
+			err = _os.Write_bool(res, 0)
+			if err != nil {
+				return err
+			}
+
+			_tupRsp_.PutBuffer("res", _os.ToBytes())
+
+			_os.Reset()
+			err = _tupRsp_.Encode(_os)
+			if err != nil {
+				return err
+			}
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			_rspJson_ := map[string]interface{}{}
+			_rspJson_["res"] = res
+
+			var _rspByte_ []byte
+			if _rspByte_, err = json.Marshal(_rspJson_); err != nil {
+				return err
+			}
+
+			_os.Reset()
+			err = _os.Write_slice_uint8(_rspByte_)
+			if err != nil {
+				return err
+			}
+		}
+	case "SysUser_SetPwd":
+		var oldPassword string
+		var newPassword string
+		var req SysUser
+		var res bool
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+
+			err = _is.Read_string(&oldPassword, 1, true)
+			if err != nil {
+				return err
+			}
+
+			err = _is.Read_string(&newPassword, 2, true)
+			if err != nil {
+				return err
+			}
+
+			err = req.ReadBlock(_is, 3, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_reqTup_ := tup.NewUniAttribute()
+			_reqTup_.Decode(_is)
+
+			var _tupBuffer_ []byte
+
+			_reqTup_.GetBuffer("oldPassword", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = _is.Read_string(&oldPassword, 0, true)
+			if err != nil {
+				return err
+			}
+
+			_reqTup_.GetBuffer("newPassword", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = _is.Read_string(&newPassword, 0, true)
+			if err != nil {
+				return err
+			}
+
+			_reqTup_.GetBuffer("req", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = req.ReadBlock(_is, 0, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			var _jsonDat_ map[string]interface{}
+			err = json.Unmarshal(_is.ToBytes(), &_jsonDat_)
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["oldPassword"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &oldPassword); err != nil {
+					return err
+				}
+			}
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["newPassword"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &newPassword); err != nil {
+					return err
+				}
+			}
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["req"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &req); err != nil {
+					return err
+				}
+			}
+
+		} else {
+			err = fmt.Errorf("Decode reqpacket fail, error version:", tarsReq.IVersion)
+			return err
+		}
+
+		if _withContext == false {
+			_imp := _val.(_impWebApiAuth)
+			err = _imp.SysUser_SetPwd(oldPassword, newPassword, &req, &res)
+		} else {
+			_imp := _val.(_impWebApiAuthWithContext)
+			err = _imp.SysUser_SetPwd(tarsCtx, oldPassword, newPassword, &req, &res)
+		}
+
+		if err != nil {
+			return err
+		}
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+			_os.Reset()
+
+			err = _os.Write_bool(res, 4)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_tupRsp_ := tup.NewUniAttribute()
+
+			_os.Reset()
+			err = _os.Write_bool(res, 0)
+			if err != nil {
+				return err
+			}
+
+			_tupRsp_.PutBuffer("res", _os.ToBytes())
+
+			_os.Reset()
+			err = _tupRsp_.Encode(_os)
+			if err != nil {
+				return err
+			}
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			_rspJson_ := map[string]interface{}{}
+			_rspJson_["res"] = res
+
+			var _rspByte_ []byte
+			if _rspByte_, err = json.Marshal(_rspJson_); err != nil {
+				return err
+			}
+
+			_os.Reset()
+			err = _os.Write_slice_uint8(_rspByte_)
+			if err != nil {
+				return err
+			}
+		}
+	case "SysConfig_Create":
+		var req SysConfig
+		var res SysConfig
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+
+			err = req.ReadBlock(_is, 1, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_reqTup_ := tup.NewUniAttribute()
+			_reqTup_.Decode(_is)
+
+			var _tupBuffer_ []byte
+
+			_reqTup_.GetBuffer("req", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = req.ReadBlock(_is, 0, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			var _jsonDat_ map[string]interface{}
+			err = json.Unmarshal(_is.ToBytes(), &_jsonDat_)
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["req"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &req); err != nil {
+					return err
+				}
+			}
+
+		} else {
+			err = fmt.Errorf("Decode reqpacket fail, error version:", tarsReq.IVersion)
+			return err
+		}
+
+		if _withContext == false {
+			_imp := _val.(_impWebApiAuth)
+			err = _imp.SysConfig_Create(&req, &res)
+		} else {
+			_imp := _val.(_impWebApiAuthWithContext)
+			err = _imp.SysConfig_Create(tarsCtx, &req, &res)
+		}
+
+		if err != nil {
+			return err
+		}
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+			_os.Reset()
+
+			err = res.WriteBlock(_os, 2)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_tupRsp_ := tup.NewUniAttribute()
+
+			_os.Reset()
+			err = res.WriteBlock(_os, 0)
+			if err != nil {
+				return err
+			}
+
+			_tupRsp_.PutBuffer("res", _os.ToBytes())
+
+			_os.Reset()
+			err = _tupRsp_.Encode(_os)
+			if err != nil {
+				return err
+			}
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			_rspJson_ := map[string]interface{}{}
+			_rspJson_["res"] = res
+
+			var _rspByte_ []byte
+			if _rspByte_, err = json.Marshal(_rspJson_); err != nil {
+				return err
+			}
+
+			_os.Reset()
+			err = _os.Write_slice_uint8(_rspByte_)
+			if err != nil {
+				return err
+			}
+		}
+	case "SysConfig_Get":
+		var req SysConfig
+		var res SysConfig
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+
+			err = req.ReadBlock(_is, 1, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_reqTup_ := tup.NewUniAttribute()
+			_reqTup_.Decode(_is)
+
+			var _tupBuffer_ []byte
+
+			_reqTup_.GetBuffer("req", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = req.ReadBlock(_is, 0, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			var _jsonDat_ map[string]interface{}
+			err = json.Unmarshal(_is.ToBytes(), &_jsonDat_)
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["req"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &req); err != nil {
+					return err
+				}
+			}
+
+		} else {
+			err = fmt.Errorf("Decode reqpacket fail, error version:", tarsReq.IVersion)
+			return err
+		}
+
+		if _withContext == false {
+			_imp := _val.(_impWebApiAuth)
+			err = _imp.SysConfig_Get(&req, &res)
+		} else {
+			_imp := _val.(_impWebApiAuthWithContext)
+			err = _imp.SysConfig_Get(tarsCtx, &req, &res)
+		}
+
+		if err != nil {
+			return err
+		}
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+			_os.Reset()
+
+			err = res.WriteBlock(_os, 2)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_tupRsp_ := tup.NewUniAttribute()
+
+			_os.Reset()
+			err = res.WriteBlock(_os, 0)
+			if err != nil {
+				return err
+			}
+
+			_tupRsp_.PutBuffer("res", _os.ToBytes())
+
+			_os.Reset()
+			err = _tupRsp_.Encode(_os)
+			if err != nil {
+				return err
+			}
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			_rspJson_ := map[string]interface{}{}
+			_rspJson_["res"] = res
+
+			var _rspByte_ []byte
+			if _rspByte_, err = json.Marshal(_rspJson_); err != nil {
+				return err
+			}
+
+			_os.Reset()
+			err = _os.Write_slice_uint8(_rspByte_)
+			if err != nil {
+				return err
+			}
+		}
+	case "SysConfig_GetPage":
+		var pageSize int32
+		var pageIndex int32
+		var req SysConfig
+		var res SysConfig_List
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+
+			err = _is.Read_int32(&pageSize, 1, true)
+			if err != nil {
+				return err
+			}
+
+			err = _is.Read_int32(&pageIndex, 2, true)
+			if err != nil {
+				return err
+			}
+
+			err = req.ReadBlock(_is, 3, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_reqTup_ := tup.NewUniAttribute()
+			_reqTup_.Decode(_is)
+
+			var _tupBuffer_ []byte
+
+			_reqTup_.GetBuffer("pageSize", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = _is.Read_int32(&pageSize, 0, true)
+			if err != nil {
+				return err
+			}
+
+			_reqTup_.GetBuffer("pageIndex", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = _is.Read_int32(&pageIndex, 0, true)
+			if err != nil {
+				return err
+			}
+
+			_reqTup_.GetBuffer("req", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = req.ReadBlock(_is, 0, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			var _jsonDat_ map[string]interface{}
+			err = json.Unmarshal(_is.ToBytes(), &_jsonDat_)
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["pageSize"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &pageSize); err != nil {
+					return err
+				}
+			}
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["pageIndex"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &pageIndex); err != nil {
+					return err
+				}
+			}
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["req"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &req); err != nil {
+					return err
+				}
+			}
+
+		} else {
+			err = fmt.Errorf("Decode reqpacket fail, error version:", tarsReq.IVersion)
+			return err
+		}
+
+		if _withContext == false {
+			_imp := _val.(_impWebApiAuth)
+			err = _imp.SysConfig_GetPage(pageSize, pageIndex, &req, &res)
+		} else {
+			_imp := _val.(_impWebApiAuthWithContext)
+			err = _imp.SysConfig_GetPage(tarsCtx, pageSize, pageIndex, &req, &res)
+		}
+
+		if err != nil {
+			return err
+		}
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+			_os.Reset()
+
+			err = res.WriteBlock(_os, 4)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_tupRsp_ := tup.NewUniAttribute()
+
+			_os.Reset()
+			err = res.WriteBlock(_os, 0)
+			if err != nil {
+				return err
+			}
+
+			_tupRsp_.PutBuffer("res", _os.ToBytes())
+
+			_os.Reset()
+			err = _tupRsp_.Encode(_os)
+			if err != nil {
+				return err
+			}
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			_rspJson_ := map[string]interface{}{}
+			_rspJson_["res"] = res
+
+			var _rspByte_ []byte
+			if _rspByte_, err = json.Marshal(_rspJson_); err != nil {
+				return err
+			}
+
+			_os.Reset()
+			err = _os.Write_slice_uint8(_rspByte_)
+			if err != nil {
+				return err
+			}
+		}
+	case "SysConfig_Update":
+		var id int32
+		var req SysConfig
+		var res SysConfig
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+
+			err = _is.Read_int32(&id, 1, true)
+			if err != nil {
+				return err
+			}
+
+			err = req.ReadBlock(_is, 2, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_reqTup_ := tup.NewUniAttribute()
+			_reqTup_.Decode(_is)
+
+			var _tupBuffer_ []byte
+
+			_reqTup_.GetBuffer("id", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = _is.Read_int32(&id, 0, true)
+			if err != nil {
+				return err
+			}
+
+			_reqTup_.GetBuffer("req", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = req.ReadBlock(_is, 0, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			var _jsonDat_ map[string]interface{}
+			err = json.Unmarshal(_is.ToBytes(), &_jsonDat_)
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["id"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &id); err != nil {
+					return err
+				}
+			}
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["req"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &req); err != nil {
+					return err
+				}
+			}
+
+		} else {
+			err = fmt.Errorf("Decode reqpacket fail, error version:", tarsReq.IVersion)
+			return err
+		}
+
+		if _withContext == false {
+			_imp := _val.(_impWebApiAuth)
+			err = _imp.SysConfig_Update(id, &req, &res)
+		} else {
+			_imp := _val.(_impWebApiAuthWithContext)
+			err = _imp.SysConfig_Update(tarsCtx, id, &req, &res)
+		}
+
+		if err != nil {
+			return err
+		}
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+			_os.Reset()
+
+			err = res.WriteBlock(_os, 3)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_tupRsp_ := tup.NewUniAttribute()
+
+			_os.Reset()
+			err = res.WriteBlock(_os, 0)
+			if err != nil {
+				return err
+			}
+
+			_tupRsp_.PutBuffer("res", _os.ToBytes())
+
+			_os.Reset()
+			err = _tupRsp_.Encode(_os)
+			if err != nil {
+				return err
+			}
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			_rspJson_ := map[string]interface{}{}
+			_rspJson_["res"] = res
+
+			var _rspByte_ []byte
+			if _rspByte_, err = json.Marshal(_rspJson_); err != nil {
+				return err
+			}
+
+			_os.Reset()
+			err = _os.Write_slice_uint8(_rspByte_)
+			if err != nil {
+				return err
+			}
+		}
+	case "SysConfig_Delete":
+		var req SysConfig
+		var res SysConfig
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+
+			err = req.ReadBlock(_is, 1, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_reqTup_ := tup.NewUniAttribute()
+			_reqTup_.Decode(_is)
+
+			var _tupBuffer_ []byte
+
+			_reqTup_.GetBuffer("req", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = req.ReadBlock(_is, 0, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			var _jsonDat_ map[string]interface{}
+			err = json.Unmarshal(_is.ToBytes(), &_jsonDat_)
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["req"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &req); err != nil {
+					return err
+				}
+			}
+
+		} else {
+			err = fmt.Errorf("Decode reqpacket fail, error version:", tarsReq.IVersion)
+			return err
+		}
+
+		if _withContext == false {
+			_imp := _val.(_impWebApiAuth)
+			err = _imp.SysConfig_Delete(&req, &res)
+		} else {
+			_imp := _val.(_impWebApiAuthWithContext)
+			err = _imp.SysConfig_Delete(tarsCtx, &req, &res)
+		}
+
+		if err != nil {
+			return err
+		}
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+			_os.Reset()
+
+			err = res.WriteBlock(_os, 2)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_tupRsp_ := tup.NewUniAttribute()
+
+			_os.Reset()
+			err = res.WriteBlock(_os, 0)
+			if err != nil {
+				return err
+			}
+
+			_tupRsp_.PutBuffer("res", _os.ToBytes())
+
+			_os.Reset()
+			err = _tupRsp_.Encode(_os)
+			if err != nil {
+				return err
+			}
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			_rspJson_ := map[string]interface{}{}
+			_rspJson_["res"] = res
+
+			var _rspByte_ []byte
+			if _rspByte_, err = json.Marshal(_rspJson_); err != nil {
+				return err
+			}
+
+			_os.Reset()
+			err = _os.Write_slice_uint8(_rspByte_)
+			if err != nil {
+				return err
+			}
+		}
+	case "SysConfig_BatchDelete":
+		var id []int32
+		var req SysConfig
+		var res bool
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+
+			err, have, ty = _is.SkipToNoCheck(1, true)
+			if err != nil {
+				return err
+			}
+
+			if ty == codec.LIST {
+				err = _is.Read_int32(&length, 0, true)
+				if err != nil {
+					return err
+				}
+
+				id = make([]int32, length)
+				for i2, e2 := int32(0), length; i2 < e2; i2++ {
+
+					err = _is.Read_int32(&id[i2], 0, false)
+					if err != nil {
+						return err
+					}
+
+				}
+			} else if ty == codec.SIMPLE_LIST {
+				err = fmt.Errorf("not support simple_list type")
+				if err != nil {
+					return err
+				}
+
+			} else {
+				err = fmt.Errorf("require vector, but not")
+				if err != nil {
+					return err
+				}
+
+			}
+
+			err = req.ReadBlock(_is, 2, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_reqTup_ := tup.NewUniAttribute()
+			_reqTup_.Decode(_is)
+
+			var _tupBuffer_ []byte
+
+			_reqTup_.GetBuffer("id", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err, have, ty = _is.SkipToNoCheck(0, true)
+			if err != nil {
+				return err
+			}
+
+			if ty == codec.LIST {
+				err = _is.Read_int32(&length, 0, true)
+				if err != nil {
+					return err
+				}
+
+				id = make([]int32, length)
+				for i3, e3 := int32(0), length; i3 < e3; i3++ {
+
+					err = _is.Read_int32(&id[i3], 0, false)
+					if err != nil {
+						return err
+					}
+
+				}
+			} else if ty == codec.SIMPLE_LIST {
+				err = fmt.Errorf("not support simple_list type")
+				if err != nil {
+					return err
+				}
+
+			} else {
+				err = fmt.Errorf("require vector, but not")
+				if err != nil {
+					return err
+				}
+
+			}
+
+			_reqTup_.GetBuffer("req", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = req.ReadBlock(_is, 0, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			var _jsonDat_ map[string]interface{}
+			err = json.Unmarshal(_is.ToBytes(), &_jsonDat_)
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["id"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &id); err != nil {
+					return err
+				}
+			}
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["req"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &req); err != nil {
+					return err
+				}
+			}
+
+		} else {
+			err = fmt.Errorf("Decode reqpacket fail, error version:", tarsReq.IVersion)
+			return err
+		}
+
+		if _withContext == false {
+			_imp := _val.(_impWebApiAuth)
+			err = _imp.SysConfig_BatchDelete(id, &req, &res)
+		} else {
+			_imp := _val.(_impWebApiAuthWithContext)
+			err = _imp.SysConfig_BatchDelete(tarsCtx, id, &req, &res)
+		}
+
+		if err != nil {
+			return err
+		}
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+			_os.Reset()
+
+			err = _os.Write_bool(res, 3)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_tupRsp_ := tup.NewUniAttribute()
+
+			_os.Reset()
+			err = _os.Write_bool(res, 0)
+			if err != nil {
+				return err
+			}
+
+			_tupRsp_.PutBuffer("res", _os.ToBytes())
+
+			_os.Reset()
+			err = _tupRsp_.Encode(_os)
+			if err != nil {
+				return err
+			}
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			_rspJson_ := map[string]interface{}{}
+			_rspJson_["res"] = res
+
+			var _rspByte_ []byte
+			if _rspByte_, err = json.Marshal(_rspJson_); err != nil {
+				return err
+			}
+
+			_os.Reset()
+			err = _os.Write_slice_uint8(_rspByte_)
+			if err != nil {
+				return err
+			}
+		}
 	case "LoginLog_Get":
 		var req LoginLog
 		var res LoginLog
@@ -1579,9 +5539,9 @@ func (_obj *WebApiAuth) Dispatch(tarsCtx context.Context, _val interface{}, tars
 				}
 
 				id = make([]int32, length)
-				for i1, e1 := int32(0), length; i1 < e1; i1++ {
+				for i4, e4 := int32(0), length; i4 < e4; i4++ {
 
-					err = _is.Read_int32(&id[i1], 0, false)
+					err = _is.Read_int32(&id[i4], 0, false)
 					if err != nil {
 						return err
 					}
@@ -1626,9 +5586,9 @@ func (_obj *WebApiAuth) Dispatch(tarsCtx context.Context, _val interface{}, tars
 				}
 
 				id = make([]int32, length)
-				for i2, e2 := int32(0), length; i2 < e2; i2++ {
+				for i5, e5 := int32(0), length; i5 < e5; i5++ {
 
-					err = _is.Read_int32(&id[i2], 0, false)
+					err = _is.Read_int32(&id[i5], 0, false)
 					if err != nil {
 						return err
 					}

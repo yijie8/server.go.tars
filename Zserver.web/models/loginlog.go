@@ -26,49 +26,49 @@ type LoginLog struct {
 	BaseModel
 }
 
-var req Zserver.LoginLog
-var res Zserver.LoginLog
-var ress Zserver.LoginLog_List
-var doc LoginLog
-var docs []LoginLog
+var req_loginlog Zserver.LoginLog
+var res_loginlog Zserver.LoginLog
+var ress_loginLog_List Zserver.LoginLog_List
+var doc_loginLog LoginLog
+var docs_loginLog []LoginLog
 
 func (LoginLog) TableName() string {
 	return "sys_loginlog"
 }
 
 func (e *LoginLog) Get() (LoginLog, error) {
-	err := json.Unmarshal(client.Struct2Json(e), &req)
+	err := json.Unmarshal(client.Struct2Json(e), &req_loginlog)
 	if err != nil {
-		return doc, err
+		return doc_loginLog, err
 	}
 
-	err = client.WebApiAuth().LoginLog_Get(&req, &res)
+	err = client.WebApiAuth().LoginLog_Get(&req_loginlog, &res_loginlog)
 	if err != nil {
-		return doc, err
+		return doc_loginLog, err
 	}
-	err = json.Unmarshal(client.Struct2Json(res), &doc)
+	err = json.Unmarshal(client.Struct2Json(res_loginlog), &doc_loginLog)
 	if err != nil {
-		return doc, err
+		return doc_loginLog, err
 	}
 
-	return doc, nil
+	return doc_loginLog, nil
 }
 
 func (e *LoginLog) GetPage(pageSize int, pageIndex int) ([]LoginLog, int, error) {
 	var count int
-	err := json.Unmarshal(client.Struct2Json(e), &req)
+	err := json.Unmarshal(client.Struct2Json(e), &req_loginlog)
 	if err != nil {
-		return docs, count, err
+		return docs_loginLog, count, err
 	}
-	err = client.WebApiAuth().LoginLog_GetPage(int32(pageSize), int32(pageIndex), &req, &ress)
+	err = client.WebApiAuth().LoginLog_GetPage(int32(pageSize), int32(pageIndex), &req_loginlog, &ress_loginLog_List)
 	if err != nil {
-		return docs, count, err
+		return docs_loginLog, count, err
 	}
-	err = json.Unmarshal(client.Struct2Json(res), &docs)
+	err = json.Unmarshal(client.Struct2Json(res_loginlog), &docs_loginLog)
 	if err != nil {
-		return docs, count, err
+		return docs_loginLog, count, err
 	}
-	return docs, count, nil
+	return docs_loginLog, count, nil
 }
 
 func (e *LoginLog) Create() (LoginLog, error) {
@@ -76,16 +76,16 @@ func (e *LoginLog) Create() (LoginLog, error) {
 	e.CreateBy = "0"
 	e.UpdateBy = "0"
 
-	err := json.Unmarshal(client.Struct2Json(e), &req)
+	err := json.Unmarshal(client.Struct2Json(e), &req_loginlog)
 	if err != nil {
 		return doc, err
 	}
 
-	err = client.WebApiAuth().LoginLog_Create(&req, &res)
+	err = client.WebApiAuth().LoginLog_Create(&req_loginlog, &res_loginlog)
 	if err != nil {
 		return doc, err
 	}
-	err = json.Unmarshal(client.Struct2Json(res), &doc)
+	err = json.Unmarshal(client.Struct2Json(res_loginlog), &doc)
 	if err != nil {
 		return doc, err
 	}
@@ -93,15 +93,15 @@ func (e *LoginLog) Create() (LoginLog, error) {
 }
 
 func (e *LoginLog) Update(id int) (update LoginLog, err error) {
-	err = json.Unmarshal(client.Struct2Json(e), &req)
+	err = json.Unmarshal(client.Struct2Json(e), &req_loginlog)
 	if err != nil {
 		return update, err
 	}
-	err = client.WebApiAuth().LoginLog_Update(int32(id), &req, &res)
+	err = client.WebApiAuth().LoginLog_Update(int32(id), &req_loginlog, &res_loginlog)
 	if err != nil {
 		return update, err
 	}
-	err = json.Unmarshal(client.Struct2Json(res), &update)
+	err = json.Unmarshal(client.Struct2Json(res_loginlog), &update)
 	if err != nil {
 		return update, err
 	}
@@ -110,15 +110,15 @@ func (e *LoginLog) Update(id int) (update LoginLog, err error) {
 }
 
 func (e *LoginLog) BatchDelete(id []int) (Result bool, err error) {
-	err = json.Unmarshal(client.Struct2Json(e), &req)
+	err = json.Unmarshal(client.Struct2Json(e), &req_loginlog)
 	if err != nil {
 		return false, err
 	}
-	err = client.WebApiAuth().LoginLog_BatchDelete(client.Ar2Int32(id), &req, &Result)
+	err = client.WebApiAuth().LoginLog_BatchDelete(client.Ar2Int32(id), &req_loginlog, &Result)
 	if err != nil {
 		return false, err
 	}
-	err = json.Unmarshal(client.Struct2Json(res), &doc)
+	err = json.Unmarshal(client.Struct2Json(res_loginlog), &doc_loginLog)
 	if err != nil {
 		return false, err
 	}
