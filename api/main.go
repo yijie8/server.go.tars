@@ -1,0 +1,62 @@
+package main
+
+// TODO webApi
+import (
+	"TBapi/router"
+	"os"
+
+	"github.com/TarsCloud/TarsGo/tars"
+	"github.com/gin-gonic/gin"
+	"github.com/yijie8/zserver/tools"
+	"github.com/yijie8/zserver/tools/config"
+)
+
+func main() {
+	// Get server config
+	cfg := tars.GetServerConfig()
+	mux := &tars.TarsHttpMux{}
+
+	// 添加gin
+	r := gin.New()
+
+	// 发布前必须改这里
+	// gin.SetMode(gin.ReleaseMode)//正式
+
+	// 1. 读取配置
+	if PathExists("settings.yml") {
+		config.ConfigSetup("settings.yml")
+	} else {
+		config.ConfigSetup("/data/app/conf/Zserver_Web_settings.yml")
+	}
+	// 2. 设置日志
+	tools.InitLogger()
+
+	//gcache 本地缓存配置 TODO
+
+	// 注册系统路由
+	router.InitSysRouter(r)
+
+	// 托管给gin
+	mux.HandleFunc("/", r.ServeHTTP)
+	// ///////////////
+
+	// Register http server
+	tars.AddHttpServant(mux, cfg.App+"."+cfg.Server+".HttpObj")
+
+	// Register Servant
+	// app.AddServantWithContext(imp, cfg.App+"."+cfg.Server+".TcpObj")
+
+	// Run application
+	tars.Run()
+}
+
+func PathExists(path string) bool {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true
+	}
+	if os.IsNotExist(err) {
+		return false
+	}
+	return false
+}
