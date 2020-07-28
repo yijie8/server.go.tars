@@ -7,6 +7,7 @@ import (
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gcache"
 	"github.com/gogf/gf/util/gconv"
+	"github.com/spf13/viper"
 	"net/http"
 	"time"
 )
@@ -48,7 +49,7 @@ func CacheTb(c *gin.Context, key string, f func() (interface{}, error)) {
 			}
 			return res
 		}
-	}, time.Second*g.Config().GetDuration("redis.cacheDefaultTime"))
+	}, time.Second*viper.GetDuration("settings.redis.cacheDefaultTime"))
 
 	response.Json(c, http.StatusOK, "", rr)
 }

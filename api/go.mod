@@ -13,6 +13,7 @@ require (
 	github.com/issue9/assert v1.3.4 // indirect
 	github.com/nilorg/go-opentaobao v0.0.0-20200504080456-93067397da1c
 	github.com/sirupsen/logrus v1.6.0
+	github.com/spf13/viper v1.7.0
 	github.com/swaggo/swag v1.5.1
 	github.com/yijie8/zserver v0.0.0-20200713024715-80ef4ccf2df5
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9

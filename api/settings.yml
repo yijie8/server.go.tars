@@ -24,3 +24,5 @@ settings:
   ssl:
     key: keystring
     pem: temp/pem.pem
+  redis:
+    cacheDefaultTime: 86400
