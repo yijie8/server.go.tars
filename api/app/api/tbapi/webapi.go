@@ -13,16 +13,17 @@ import (
 // 配合页面里的cplist
 func Cplist(c *gin.Context) {
 	type queryValid_ struct {
-		C  string `json:"c"`
-		Ty string `json:"ty"`
-		Q  string `json:"q" binding:"required_without=C"`
-		Pv string `json:"pv"`
-		T  string `json:"t"`
-		P  string `json:"p"`
+		C  string `form:"c"`
+		Ty string `form:"ty"`
+		Q  string `form:"q" binding:"required_without=C"`
+		Pv string `form:"pv"`
+		T  string `form:"t"`
+		P  string `form:"p"`
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
@@ -42,12 +43,13 @@ func Cplist(c *gin.Context) {
 // 从商品ID取相关
 func XgByIdKw(c *gin.Context) {
 	type queryValid_ struct {
-		Id string `json:"id" binding:"required"`
+		Id string `form:"id" binding:"required"`
 		Kw string
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
@@ -72,11 +74,12 @@ func XgByIdKw(c *gin.Context) {
 // 取相关商品列表 by cpid
 func XgById(c *gin.Context) {
 	type queryValid_ struct {
-		Id int64 `json:"id" binding:"required"`
+		Id int64 `form:"id" binding:"required"`
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
@@ -90,11 +93,12 @@ func XgById(c *gin.Context) {
 // 取相关商品列表 by key
 func XgByKey(c *gin.Context) {
 	type queryValid_ struct {
-		Key string `json:"key" binding:"required"`
+		Key string `form:"key" binding:"required"`
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
@@ -109,11 +113,12 @@ func XgByKey(c *gin.Context) {
 // 搜索商品返１０条
 func Cp10(c *gin.Context) {
 	type queryValid_ struct {
-		Key string `json:"key" binding:"required"`
+		Key string `form:"key" binding:"required"`
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
@@ -128,11 +133,12 @@ func Cp10(c *gin.Context) {
 // 取店铺详情
 func Dp(c *gin.Context) {
 	type queryValid_ struct {
-		Id int `json:"id" binding:"required"`
+		Id int `form:"id" binding:"required"`
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
@@ -146,11 +152,12 @@ func Dp(c *gin.Context) {
 // 取商品详情
 func Cpweb(c *gin.Context) {
 	type queryValid_ struct {
-		Id int64 `json:"id" binding:"required"`
+		Id int64 `form:"id" binding:"required"`
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())

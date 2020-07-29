@@ -88,6 +88,9 @@ func (t *Tbsdk) GetTB(args ...string) *simplejson.Json {
 		log.Debug(err)
 	}
 	//log.Debug(res.MarshalJSON())
+	if res == nil {
+		return &simplejson.Json{}
+	}
 	return res
 }
 

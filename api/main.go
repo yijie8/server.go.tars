@@ -3,6 +3,7 @@ package main
 // TODO webApi
 import (
 	"TBapi/router"
+	"github.com/yijie8/zserver/middleware"
 	"os"
 
 	"github.com/TarsCloud/TarsGo/tars"
@@ -32,6 +33,12 @@ func main() {
 	tools.InitLogger()
 
 	//gcache 本地缓存配置 TODO
+	//_ = gcache.New()
+
+	middleware.InitMiddleware(r)
+	// the jwt middleware
+	//authMiddleware, err := middleware_auth.AuthInit()
+	//tools.HasError(err, "JWT Init Error", 500)
 
 	// 注册系统路由
 	router.InitSysRouter(r)

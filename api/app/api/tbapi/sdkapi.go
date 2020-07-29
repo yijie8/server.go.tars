@@ -11,17 +11,18 @@ import (
 
 func CpList(c *gin.Context) {
 	type queryValid_ struct {
-		C           string `json:"c"` //分类
-		Q           string `json:"q" binding:"required_without=C"`
-		CC          string `json:"cc"`            //排序
-		P           string `json:"p"`             //分页
-		Zid         string `json:"zid"`           //站点的ID 62a等
-		MaterialId  string `json:"material_id"`   //物料ID
-		StartTkRate string `json:"start_tk_rate"` //开始的提成
+		C           string `form:"c"` //分类
+		Q           string `form:"q" binding:"required_without=C"`
+		CC          string `form:"cc"`            //排序
+		P           string `form:"p"`             //分页
+		Zid         string `form:"zid"`           //站点的ID 62a等
+		MaterialId  string `form:"material_id"`   //物料ID
+		StartTkRate string `form:"start_tk_rate"` //开始的提成
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(c, http.StatusRequestedRangeNotSatisfiable, e.String())
@@ -50,12 +51,13 @@ func CpList(c *gin.Context) {
 
 func DPXgByKey(c *gin.Context) {
 	type queryValid_ struct {
-		Key  string `json:"key" binding:"required"`
-		Page string `json:"p"` //分页
+		Key  string `form:"key" binding:"required"`
+		Page string `form:"p"` //分页
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
@@ -67,11 +69,12 @@ func DPXgByKey(c *gin.Context) {
 
 func DPXgById(c *gin.Context) {
 	type queryValid_ struct {
-		Id string `json:"id" binding:"required"`
+		Id string `form:"id" binding:"required"`
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
@@ -83,11 +86,12 @@ func DPXgById(c *gin.Context) {
 
 func CpXgList(c *gin.Context) {
 	type queryValid_ struct {
-		Id int64 `json:"id" binding:"required"`
+		Id int64 `form:"id" binding:"required"`
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
@@ -99,12 +103,14 @@ func CpXgList(c *gin.Context) {
 
 func Cp(c *gin.Context) {
 	type queryValid_ struct {
-		Ids string `json:"id" binding:"required"`
+		Ids string `form:"id" binding:"required"`
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
+
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
 	//}
@@ -115,15 +121,16 @@ func Cp(c *gin.Context) {
 
 func Tgg(c *gin.Context) {
 	type queryValid_ struct {
-		StartTime string `json:"start_time"`
-		EndTime   string `json:"end_time"`
-		PageNo    int    `json:"page_no"`
-		PageSize  int    `json:"page_size"`
-		Zid       string `json:"zid"`
+		StartTime string `form:"start_time"`
+		EndTime   string `form:"end_time"`
+		PageNo    int    `form:"page_no"`
+		PageSize  int    `form:"page_size"`
+		Zid       string `form:"zid"`
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
@@ -135,13 +142,14 @@ func Tgg(c *gin.Context) {
 
 func Tkl(c *gin.Context) {
 	type queryValid_ struct {
-		Text string `json:"text" binding:"required"`
-		Url  string `json:"url" binding:"required"`
-		Zid  string `json:"zid"`
+		Text string `form:"text" binding:"required"`
+		Url  string `form:"url" binding:"required"`
+		Zid  string `form:"zid"`
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
@@ -154,17 +162,18 @@ func Tkl(c *gin.Context) {
 
 func Content(c *gin.Context) {
 	type queryValid_ struct {
-		Type            string `json:"type"`
-		BeforeTimestamp int64  `json:"before_timestamp"`
-		Count           int    `json:"count"`
-		Cid             int    `json:"cid"`
-		ImageWidth      int    `json:"image_width"`
-		ImageHeight     int    `json:"image_height"`
-		Zid             string `json:"zid"`
+		Type            string `form:"type"`
+		BeforeTimestamp int64  `form:"before_timestamp"`
+		Count           int    `form:"count"`
+		Cid             int    `form:"cid"`
+		ImageWidth      int    `form:"image_width"`
+		ImageHeight     int    `form:"image_height"`
+		Zid             string `form:"zid"`
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
@@ -176,17 +185,18 @@ func Content(c *gin.Context) {
 
 func CpGood(c *gin.Context) {
 	type queryValid_ struct {
-		MaterialId    int    `json:"type"`
-		ContentId     int    `json:"content_id"`
-		ContentSource string `json:"content_source"`
-		ItemId        string `json:"item_id"`
-		PageSize      int    `json:"page_size"`
-		PageNo        int    `json:"page_no"`
-		Zid           string `json:"zid"`
+		MaterialId    int    `form:"type"`
+		ContentId     int    `form:"content_id"`
+		ContentSource string `form:"content_source"`
+		ItemId        string `form:"item_id"`
+		PageSize      int    `form:"page_size"`
+		PageNo        int    `form:"page_no"`
+		Zid           string `form:"zid"`
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
@@ -198,12 +208,13 @@ func CpGood(c *gin.Context) {
 
 func CouponDesc(c *gin.Context) {
 	type queryValid_ struct {
-		ActivityId string `json:"activity_id" binding:"required"`
-		ItemId     string `json:"item_id" binding:"required"`
+		ActivityId string `form:"activity_id" binding:"required"`
+		ItemId     string `form:"item_id" binding:"required"`
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
@@ -215,17 +226,18 @@ func CouponDesc(c *gin.Context) {
 
 func CreateTlj(c *gin.Context) {
 	type queryValid_ struct {
-		TotalNum             int    `json:"total_num"`
-		ItemId               string `json:"item_id" binding:"required"`
-		Name                 string `json:"name"`
-		UserTotalWinNumLimit int    `json:"user_total_win_num_limit"`
-		PerFace              int    `json:"per_face"`
-		SendStartTime        string `json:"send_start_time"`
-		SendEndTime          string `json:"send_end_time"`
+		TotalNum             int    `form:"total_num"`
+		ItemId               string `form:"item_id" binding:"required"`
+		Name                 string `form:"name"`
+		UserTotalWinNumLimit int    `form:"user_total_win_num_limit"`
+		PerFace              int    `form:"per_face"`
+		SendStartTime        string `form:"send_start_time"`
+		SendEndTime          string `form:"send_end_time"`
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
@@ -237,12 +249,13 @@ func CreateTlj(c *gin.Context) {
 
 func TljDesc(c *gin.Context) {
 	type queryValid_ struct {
-		RightsId string `json:"rights_id" binding:"required"`
-		Zid      string `json:"zid"`
+		RightsId string `form:"rights_id" binding:"required"`
+		Zid      string `form:"zid"`
 	}
-	queryValid := (*queryValid_)(nil)
-	if err := c.ShouldBindJSON(&queryValid); err != nil {
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
 		response.Json(c, http.StatusBadRequest, err.Error())
+		return
 	}
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
