@@ -1,6 +1,6 @@
 # make && make tar
-APP       := Zserver
-TARGET    := Web
+APP       := TB
+TARGET    := webGo
 MFLAGS    :=
 DFLAGS    :=
 # CONFIG    := client

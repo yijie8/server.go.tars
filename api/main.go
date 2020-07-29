@@ -4,6 +4,7 @@ package main
 import (
 	"TBapi/router"
 	"github.com/yijie8/zserver/middleware"
+	"log"
 	"os"
 
 	"github.com/TarsCloud/TarsGo/tars"
@@ -21,7 +22,7 @@ func main() {
 	r := gin.New()
 
 	// 发布前必须改这里
-	// gin.SetMode(gin.ReleaseMode)//正式
+	gin.SetMode(gin.ReleaseMode) //正式
 
 	// 1. 读取配置
 	if PathExists("settings.yml") {
@@ -49,6 +50,7 @@ func main() {
 
 	// Register http server
 	tars.AddHttpServant(mux, cfg.App+"."+cfg.Server+".HttpObj")
+	log.Println(tars.GetServerConfig())
 
 	// Register Servant
 	// app.AddServantWithContext(imp, cfg.App+"."+cfg.Server+".TcpObj")
