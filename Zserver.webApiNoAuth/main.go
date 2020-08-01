@@ -48,7 +48,7 @@ func main() {
 	if PathExists("settings.yml") {
 		config.ConfigSetup("settings.yml")
 	} else {
-		config.ConfigSetup("/data/app/conf/Zserver_Web_settings.yml")
+		config.ConfigSetup("/usr/local/app/tars/tarsnode/data/Zserver_Web_settings.yml")
 	}
 	// if gin.Mode() == gin.ReleaseMode {
 	//	config.ConfigSetup("/data/app/conf/Zserver_Web_settings.yml")
