@@ -25,4 +25,4 @@ settings:
     key: keystring
     pem: temp/pem.pem
   redis:
-    cacheDefaultTime: 86400
+    cacheDefaultTime: 1

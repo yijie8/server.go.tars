@@ -59,6 +59,9 @@ type JsonxCp struct {
 // 搜索商品
 func GetSearch(key string) ([]OutCp, error) {
 	glog.Println(key, "<<<<<<<<<<<<<<<<<<<<<<<<<GetSearch")
+	if key == "" {
+		return nil, nil
+	}
 	u := url.Values{}
 	u.Add("cb", "jsonp_callback_03822715911819512")
 	u.Add("pid", "mm_12462245_2219662_23014024")

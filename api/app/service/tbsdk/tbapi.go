@@ -47,17 +47,20 @@ func GetXGId(id int64) (OutCpXg, error) {
 // 从商品ID取相关
 func GetCpXg(id string, kw ...string) (cp OutCp, arr OutCpXg, err error) {
 	kws := ""
-	if !gstr.IsNumeric(id) && len(kw) > 0 {
+	if !gstr.IsNumeric(id) && len(kw) > 0 && kw[0] != "" {
 		kws = kw[0]
 		id = ""
 	}
-	if !gutil.IsEmpty(id) {
+	if !gutil.IsEmpty(id) && gstr.IsNumeric(id) {
 		cp, err = GetCP(gconv.Int64(id))
 		if err != nil {
 			return
 		} else {
 			kws = cp.Title
 		}
+	}
+	if !gutil.IsEmpty(id) && !gstr.IsNumeric(id) {
+		kws = id
 	}
 	arr, err = GetXGKey(kws)
 	if err != nil {

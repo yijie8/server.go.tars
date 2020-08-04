@@ -3,7 +3,7 @@ module TBapi
 go 1.14
 
 require (
-	github.com/TarsCloud/TarsGo v1.1.4
+	github.com/TarsCloud/TarsGo v1.1.5
 	github.com/adamzy/cedar-go v0.0.0-20170805034717-80a9c64b256d // indirect
 	github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc
 	github.com/bitly/go-simplejson v0.5.0

@@ -4,7 +4,6 @@ package main
 import (
 	"TBapi/router"
 	"github.com/yijie8/zserver/middleware"
-	"log"
 	"os"
 
 	"github.com/TarsCloud/TarsGo/tars"
@@ -50,7 +49,7 @@ func main() {
 
 	// Register http server
 	tars.AddHttpServant(mux, cfg.App+"."+cfg.Server+".HttpObj")
-	log.Println(tars.GetServerConfig())
+	//log.Println(tars.GetServerConfig())
 
 	// Register Servant
 	// app.AddServantWithContext(imp, cfg.App+"."+cfg.Server+".TcpObj")

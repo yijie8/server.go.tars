@@ -15,7 +15,7 @@ func Cplist(c *gin.Context) {
 	type queryValid_ struct {
 		C  string `form:"c"`
 		Ty string `form:"ty"`
-		Q  string `form:"q" binding:"required_without=C"`
+		Q  string `form:"q"`
 		Pv string `form:"pv"`
 		T  string `form:"t"`
 		P  string `form:"p"`
@@ -44,7 +44,7 @@ func Cplist(c *gin.Context) {
 func XgByIdKw(c *gin.Context) {
 	type queryValid_ struct {
 		Id string `form:"id" binding:"required"`
-		Kw string
+		Kw string `form:"kw"`
 	}
 	queryValid := queryValid_{}
 	if err := c.ShouldBind(&queryValid); err != nil {
@@ -166,4 +166,8 @@ func Cpweb(c *gin.Context) {
 		func() (interface{}, error) {
 			return tbsdk.GetCP(queryValid.Id)
 		})
+}
+
+func Gets56qq() {
+
 }

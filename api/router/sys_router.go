@@ -7,7 +7,7 @@ import (
 )
 
 func InitSysRouter(r *gin.Engine) *gin.RouterGroup {
-	g := r.Group("")
+	g := r.Group("/tb_web_go")
 	//g.GET("/tbimg/*", func(c *gin.Context) {
 	//	url := c.Request.URL.Path
 	//	url = strings.ReplaceAll(url, "/tbimg/", "")
@@ -36,28 +36,28 @@ func InitSysRouter(r *gin.Engine) *gin.RouterGroup {
 	// tb接口
 	web := g.Group("/web")
 	{
-		web.GET("/Cplist", tbapi.Cplist)
-		web.GET("/XgByIdKw", tbapi.XgByIdKw)
-		web.GET("/XgById", tbapi.XgById)
-		web.GET("/XgByKey", tbapi.XgByKey)
-		web.GET("/Cp10", tbapi.Cp10)
-		web.GET("/Dp", tbapi.Dp)
-		web.GET("/Cp", tbapi.Cpweb)
+		web.GET("/cplist", tbapi.Cplist)
+		web.GET("/xgbyidkw", tbapi.XgByIdKw)
+		web.GET("/xgbyid", tbapi.XgById)
+		web.GET("/xgbykey", tbapi.XgByKey)
+		web.GET("/cp10", tbapi.Cp10)
+		web.GET("/dp", tbapi.Dp)
+		web.GET("/cp", tbapi.Cpweb)
 	}
 	sdk := g.Group("/sdk")
 	{
-		sdk.GET("/CpList", tbapi.CpList)
-		sdk.GET("/DPXgByKey", tbapi.DPXgByKey)
-		sdk.GET("/DPXgById", tbapi.DPXgById)
-		sdk.GET("/CpXgList", tbapi.CpXgList)
-		sdk.GET("/Cp", tbapi.Cp)
-		sdk.GET("/Tgg", tbapi.Tgg)
-		sdk.GET("/Tkl", tbapi.Tkl)
-		sdk.GET("/Content", tbapi.Content)
-		sdk.GET("/CpGood", tbapi.CpGood)
-		sdk.GET("/CouponDesc", tbapi.CouponDesc)
-		sdk.GET("/CreateTlj", tbapi.CreateTlj)
-		sdk.GET("/TljDesc", tbapi.TljDesc)
+		sdk.GET("/cplist", tbapi.CpList)
+		sdk.GET("/dpxgbykey", tbapi.DPXgByKey)
+		sdk.GET("/dpxgbyid", tbapi.DPXgById)
+		sdk.GET("/cpxglist", tbapi.CpXgList)
+		sdk.GET("/cp", tbapi.Cp)
+		sdk.GET("/tgg", tbapi.Tgg)
+		sdk.GET("/tkl", tbapi.Tkl)
+		sdk.GET("/content", tbapi.Content)
+		sdk.GET("/cpgood", tbapi.CpGood)
+		sdk.GET("/coupondesc", tbapi.CouponDesc)
+		sdk.GET("/createtlj", tbapi.CreateTlj)
+		sdk.GET("/tljdesc", tbapi.TljDesc)
 	}
 	return g
 }
