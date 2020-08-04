@@ -57,10 +57,10 @@ type JsonxCp struct {
 }
 
 // 搜索商品
-func GetSearch(key string) ([]OutCp, error) {
+func GetSearch_(key string) (JsonxCp, error) {
 	glog.Println(key, "<<<<<<<<<<<<<<<<<<<<<<<<<GetSearch")
 	if key == "" {
-		return nil, nil
+		return JsonxCp{}, nil
 	}
 	u := url.Values{}
 	u.Add("cb", "jsonp_callback_03822715911819512")
@@ -81,6 +81,15 @@ func GetSearch(key string) ([]OutCp, error) {
 	txt = strings.ReplaceAll(txt, "})", "}")
 	var jsonx JsonxCp
 	if err := json.Unmarshal([]byte(txt), &jsonx); err != nil {
+		return JsonxCp{}, err
+	}
+	return jsonx, nil
+}
+
+// 搜索商品
+func GetSearch(key string) ([]OutCp, error) {
+	jsonx, err := GetSearch_(key)
+	if err != nil {
 		return nil, err
 	}
 	if jsonx.Code != 200 || jsonx.Data.Items == nil {

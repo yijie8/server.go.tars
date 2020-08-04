@@ -25,17 +25,19 @@ func Cplist(c *gin.Context) {
 		response.Json(c, http.StatusBadRequest, err.Error())
 		return
 	}
-	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
-	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
-	//}
-
 	tbsdk.CacheTb(c, utils.RunFuncName()+"_"+utils.JoinAny(queryValid, "_"),
 		func() (interface{}, error) {
-			res := tbsdk.Cplist(queryValid.Ty, queryValid.Q, queryValid.C, queryValid.Pv, queryValid.T, queryValid.P)
+			res, count := tbsdk.Cplist(queryValid.Ty, queryValid.Q, queryValid.C, queryValid.Pv, queryValid.T, queryValid.P)
 			if res == nil {
-				return res, errors.New("无数据")
+				return g.Map{
+					"result": res,
+					"count":  count,
+				}, errors.New("无数据")
 			} else {
-				return res, nil
+				return g.Map{
+					"result": res,
+					"count":  count,
+				}, nil
 			}
 		})
 }
@@ -168,6 +170,15 @@ func Cpweb(c *gin.Context) {
 		})
 }
 
-func Gets56qq() {
-
+func Gets56qq(c *gin.Context) {
+	type queryValid_ struct {
+		Q string `form:"qq" binding:"required"`
+	}
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
+		response.Json(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	res, _ := tbsdk.GetSearch_(queryValid.Q)
+	response.Json(c, http.StatusOK, "", res.Data.Items)
 }

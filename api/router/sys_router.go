@@ -43,6 +43,7 @@ func InitSysRouter(r *gin.Engine) *gin.RouterGroup {
 		web.GET("/cp10", tbapi.Cp10)
 		web.GET("/dp", tbapi.Dp)
 		web.GET("/cp", tbapi.Cpweb)
+		web.GET("/gets56qq", tbapi.Gets56qq)
 	}
 	sdk := g.Group("/sdk")
 	{

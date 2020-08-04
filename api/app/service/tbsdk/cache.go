@@ -33,6 +33,7 @@ func CacheTb(c *gin.Context, key string, f func() (interface{}, error)) {
 							ss["arr"] = ToChangePic(ss["arr"])
 						}
 					}
+					res = ss
 				case GetCpListJson:
 					res = ToChangePic(res)
 				case GetDPXgListKeyJson:

@@ -69,7 +69,7 @@ func GetCpXg(id string, kw ...string) (cp OutCp, arr OutCpXg, err error) {
 	return
 }
 
-func Cplist(ty, q, c, pv, t, p string) []OutCp {
+func Cplist(ty, q, c, pv, t, p string) ([]OutCp, int) {
 	if gutil.IsEmpty(ty) {
 		ty = "1"
 	}
@@ -123,7 +123,7 @@ func Cplist(ty, q, c, pv, t, p string) []OutCp {
 				Pic:       ToChangePic(cp.PictUrl).(string),
 				Uid:       cp.SellerId,
 			},
-		}
+		}, 0
 	} else if ty == "3" {
 		id := q
 		cps, err := NewTbsdk().GetCpXgList(gconv.Int64(id)).ToStruct()
@@ -144,12 +144,12 @@ func Cplist(ty, q, c, pv, t, p string) []OutCp {
 				Uid:       v.SellerId,
 			})
 		}
-		return cpall
+		return cpall, len(cpall)
 	}
-	return nil
+	return nil, 0
 }
 
-func Cpjson2OutCp(json GetCpListJson) (cpall []OutCp) {
+func Cpjson2OutCp(json GetCpListJson) (cpall []OutCp, count int) {
 	for _, v := range json.ResultList.MapData {
 		cpall = append(cpall, OutCp{
 			Id:        v.NumIid,
@@ -162,5 +162,6 @@ func Cpjson2OutCp(json GetCpListJson) (cpall []OutCp) {
 			Uid:       v.SellerID,
 		})
 	}
+	count = json.TotalResults
 	return
 }
