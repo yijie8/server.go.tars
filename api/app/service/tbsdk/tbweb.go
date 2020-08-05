@@ -57,7 +57,7 @@ type JsonxCp struct {
 }
 
 // 搜索商品
-func GetSearch_(key string) (JsonxCp, error) {
+func GetSearch_(key string, args ...map[string]string) (JsonxCp, error) {
 	glog.Println(key, "<<<<<<<<<<<<<<<<<<<<<<<<<GetSearch")
 	if key == "" {
 		return JsonxCp{}, nil
@@ -75,6 +75,13 @@ func GetSearch_(key string) (JsonxCp, error) {
 	u.Add("v", "2.0")
 	u.Add("et", "")
 	u.Add("ct", "keyword="+key)
+	if len(args) > 0 {
+		for k, v := range args[0] {
+			if u.Get(k) != "" {
+				u.Set(k, v)
+			}
+		}
+	}
 	uri := u.Encode()
 	txt := utils.Getpage("http://g.click.taobao.com/display?" + uri)
 	txt = strings.ReplaceAll(txt, "jsonp_callback_03822715911819512(", "")

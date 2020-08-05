@@ -67,6 +67,7 @@ func DPXgByKey(c *gin.Context) {
 	})
 }
 
+// 没有数据 TODO
 func DPXgById(c *gin.Context) {
 	type queryValid_ struct {
 		Id string `form:"id" binding:"required"`
@@ -79,6 +80,7 @@ func DPXgById(c *gin.Context) {
 	//if e := gvalid.CheckStruct(&queryValid, nil); e != nil {
 	//	response.Json(r, http.StatusRequestedRangeNotSatisfiable, e.String())
 	//}
+
 	tbsdk.CacheTb(c, utils.RunFuncName()+"_"+utils.JoinAny(queryValid, "_"), func() (interface{}, error) {
 		return tbsdk.NewTbsdk().GetDPXgListId(gconv.Int(queryValid.Id)).ToStruct()
 	})

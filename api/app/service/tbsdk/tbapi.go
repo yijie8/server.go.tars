@@ -111,7 +111,12 @@ func Cplist(ty, q, c, pv, t, p string) ([]OutCp, int) {
 		if err != nil {
 			glog.Error(err)
 		}
-		cp := cps.(CpOnly)
+		cpx := cps.([]CpOnly)
+		cp := CpOnly{}
+		if len(cpx) > 0 {
+			cp = cpx[0]
+		}
+
 		return []OutCp{
 			{
 				Id:        cp.NumIid,

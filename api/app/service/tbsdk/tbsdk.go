@@ -191,12 +191,12 @@ func (t *Tbsdk) GetCpList(args map[string]interface{}, appkey ...string) *Tbsdk 
 	return t
 }
 
-// 取相关商品
+// 取相关商品 没有数据 TODO
 func (t *Tbsdk) GetCpXgList(cpid int64) *Tbsdk {
 	t = NewTbsdk()
 	t.Api = "taobao.tbk.item.recommend.get"
 	t.Args = map[string]interface{}{
-		"fields":  "num_iid,title,pict_url,reserve_price,zk_final_price,nick,seller_id,volume",
+		"fields":  "num_iid",
 		"num_iid": cpid,
 		"count":   20,
 	}

@@ -182,3 +182,19 @@ func Gets56qq(c *gin.Context) {
 	res, _ := tbsdk.GetSearch_(queryValid.Q)
 	response.Json(c, http.StatusOK, "", res.Data.Items)
 }
+
+func Gets56q(c *gin.Context) {
+	type queryValid_ struct {
+		Q string `form:"q" binding:"required"`
+	}
+	queryValid := queryValid_{}
+	if err := c.ShouldBind(&queryValid); err != nil {
+		response.Json(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	res, _ := tbsdk.GetSearch_(queryValid.Q, map[string]string{
+		"ti": "209",
+		"tl": "720x220",
+	})
+	response.Json(c, http.StatusOK, "", res.Data.Items)
+}
