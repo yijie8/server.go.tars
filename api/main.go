@@ -21,7 +21,7 @@ func main() {
 	r := gin.New()
 
 	// 发布前必须改这里
-	gin.SetMode(gin.ReleaseMode) //正式
+	//gin.SetMode(gin.ReleaseMode) //正式
 
 	// 1. 读取配置
 	if PathExists("settings.yml") {
