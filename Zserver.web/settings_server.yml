@@ -10,11 +10,11 @@ settings:
     writertimeout: 2
   database:
     dbtype: mysql
-    host: 60.205.226.149
+    host: 192.168.105.143
     name: goadmindb
     port: 3306
-    username: goadmindb
-    password: rPwYGWuRxignYcma
+    username: root
+    password: root
   jwt:
     secret: go-admin
     timeout: 3600
