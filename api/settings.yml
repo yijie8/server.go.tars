@@ -3,7 +3,7 @@ settings:
     domain: localhost:8000
     host: 0.0.0.0
     ishttps: false
-    mode: dev
+    mode: test
     name: testApp
     port: "8000"
     readtimeout: 1

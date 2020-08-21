@@ -4,34 +4,40 @@ import (
 	"TBapi/app/api/tbapi"
 	_ "TBapi/docs"
 	"github.com/gin-gonic/gin"
+	"github.com/gogf/gf/text/gstr"
+	"strings"
 )
 
 func InitSysRouter(r *gin.Engine) *gin.RouterGroup {
 	g := r.Group("/tb_web_go")
-	//g.GET("/tbimg/*", func(c *gin.Context) {
-	//	url := c.Request.URL.Path
-	//	url = strings.ReplaceAll(url, "/tbimg/", "")
-	//	urlAr := strings.Split(url, "/")
-	//	s1 := urlAr[0]
-	//	s1 = gstr.ReplaceByArray(s1, []string{
-	//		"img1", "img01",
-	//		"img2", "img02",
-	//		"img3", "img03",
-	//		"img4", "img04",
-	//		"img5", "img05",
-	//		"gaitaobao1", "img01",
-	//		"gaitaobao2", "img02",
-	//		"gaitaobao3", "img03",
-	//		"gaitaobao4", "img04",
-	//		"gaitaobao5", "img05",
-	//	})
-	//	s2 := url[len(s1+"/"):]
-	//	if c.DefaultQuery("p", "") != "" {
-	//		c.Redirect(200, "http://"+s1+".alicdn.com/"+s2)
-	//	} else {
-	//		c.Redirect(200, "http://"+s1+".taobaocdn.com/"+s2)
-	//	}
-	//})
+	//rewrite ^/(.*)tbimg/(.*)$ /img.php?h=$2 last;
+	//rewrite ^/(.*)tbimg/(.*)$ http://tars.tta.cn/tb_web_go/tbimg/$2 last;
+	g.GET("/tbimg/*path", func(c *gin.Context) {
+		//path := c.Param("path")
+		url := c.Request.URL.Path
+		url = strings.ReplaceAll(url, "/tb_web_go", "")
+		url = strings.ReplaceAll(url, "/tbimg/", "")
+		urlAr := strings.Split(url, "/")
+		s1 := urlAr[0]
+		s1 = gstr.ReplaceByArray(s1, []string{
+			"img1", "img01",
+			"img2", "img02",
+			"img3", "img03",
+			"img4", "img04",
+			"img5", "img05",
+			"gaitaobao1", "img01",
+			"gaitaobao2", "img02",
+			"gaitaobao3", "img03",
+			"gaitaobao4", "img04",
+			"gaitaobao5", "img05",
+		})
+		s2 := url[len(s1+"/"):]
+		if c.DefaultQuery("p", "") != "" {
+			c.Redirect(302, "http://"+s1+".alicdn.com/"+s2)
+		} else {
+			c.Redirect(302, "http://"+s1+".taobaocdn.com/"+s2)
+		}
+	})
 
 	// tb接口
 	web := g.Group("/web")

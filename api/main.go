@@ -3,6 +3,7 @@ package main
 // TODO webApi
 import (
 	"TBapi/router"
+	"github.com/spf13/viper"
 	"github.com/yijie8/zserver/middleware"
 	"os"
 
@@ -20,15 +21,18 @@ func main() {
 	// 添加gin
 	r := gin.New()
 
-	// 发布前必须改这里
-	gin.SetMode(gin.ReleaseMode) //正式
-
 	// 1. 读取配置
 	if PathExists("settings.yml") {
 		config.ConfigSetup("settings.yml")
 	} else {
 		config.ConfigSetup("/usr/local/app/tars/tarsnode/data/Zserver_Web_settings.yml")
 	}
+
+	// 发布前必须改这里
+	if viper.GetString("settings.application.mode") == "dev" {
+		gin.SetMode(gin.ReleaseMode) //正式
+	}
+
 	// 2. 设置日志
 	tools.InitLogger()
 
