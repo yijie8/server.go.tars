@@ -8,6 +8,9 @@ require (
 	github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc
 	github.com/bitly/go-simplejson v0.5.0
 	github.com/gin-gonic/gin v1.4.0
+	github.com/go-asn1-ber/asn1-ber v1.5.1 // indirect
+	github.com/go-ldap/ldap v3.0.3+incompatible // indirect
+	github.com/go-ldap/ldap/v3 v3.2.3
 	github.com/gogf/gf v1.13.2
 	github.com/huichen/sego v0.0.0-20180617034105-3f3c8a8cfacc
 	github.com/issue9/assert v1.3.4 // indirect

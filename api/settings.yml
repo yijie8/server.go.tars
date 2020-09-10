@@ -26,3 +26,10 @@ settings:
     pem: temp/pem.pem
   redis:
     cacheDefaultTime: 1
+
+  ldap:
+    host: tta.cn
+    port: 389
+    bindDn: cn=admin;dc=tta,dc=cn
+    passwd: iamyijiewoaini
+    baseDn: dc=tta,dc=cn
