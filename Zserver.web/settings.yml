@@ -10,7 +10,7 @@ settings:
     writertimeout: 2
   database:
     dbtype: mysql
-    host: 192.168.105.143
+    host: localhost
     name: goadmindb
     port: 3306
     username: root
