@@ -2,7 +2,7 @@
 tars-protocol
 *.tgz
 Web
-
+/go-admin-ui/node_modules
 /Web
 /*.tgz
 /.idea
